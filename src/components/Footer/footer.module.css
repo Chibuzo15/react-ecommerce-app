@@ -2,10 +2,12 @@
     padding: 30px;
     box-sizing: border-box;
     min-height: 100px;
-    background-color: #232323;
     display: flex;
     flex-wrap: wrap;
     bottom: 0;
-    /* position: absolute; */
+    position: relative;
     width: 100%;
+}
+.footerWrapper{
+    background-color: #232323;
 }

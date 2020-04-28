@@ -28,7 +28,7 @@
 } */
 .DrawerToggle{
     width: 30px;
-    height: 40px;
+    height: 30px;
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
@@ -80,7 +80,7 @@
     -webkit-transform: rotate(135deg);
     -moz-transform: rotate(135deg);
     -o-transform: rotate(135deg);
-    transform: rotate(135deg) translate(0, -18px);
+    transform: rotate(135deg) translate(0, -14px);
   }
   
   .DrawerToggle.open span:nth-child(2) {
@@ -93,7 +93,11 @@
     -webkit-transform: rotate(-135deg);
     -moz-transform: rotate(-135deg);
     -o-transform: rotate(-135deg);
-    transform: rotate(-135deg) translate(0, 18px);
+    transform: rotate(-135deg) translate(0, 14px);
+  }
+
+  .DrawerToggle.open{
+    transform: translate(-7px,0);
   }
   
 

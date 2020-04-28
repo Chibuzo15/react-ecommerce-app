@@ -1,0 +1,16 @@
+.NewsletterWrapper{
+    background-color: #b5c3d3;
+    padding: 2rem 0;
+    display: block;
+    text-align: center;
+    margin: 21px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+}
+
+.NewsletterInput{
+    margin: auto;
+    height: 40px;
+    width:80%
+}

@@ -1,9 +1,9 @@
 .Header{
-    padding: 15px;
     box-sizing: border-box;
 }
 
 .Topbar{
+    padding: 12px;
     display:flex;
     box-sizing: border-box;
 }

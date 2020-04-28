@@ -1,0 +1,34 @@
+.SliderWrapper{
+    height:25vh;
+}
+
+.slider1{
+    background-image: url('../../assets/images/Carousel//home-1_1x.jpg');
+    width: 100%;
+    height:100%;
+    display: flex;
+}
+.slider2{
+    background-image: url('../../assets/images/Carousel/home-2_1x.jpg');
+    flex:1;
+    height:100%;
+    display: flex;
+}
+
+@media screen and( min-width: 400px){
+    .SliderWrapper{
+        height:auto;
+    }
+
+    .slider1{
+        background-image: url('../../assets/images/Carousel/home-1.jpg');
+        flex:1;
+        height:100%
+    }
+    .slider2{
+        background-image: url('../../assets/images/Carousel/home-2.jpg');
+        flex:1;
+        height:100%
+    }
+    
+}

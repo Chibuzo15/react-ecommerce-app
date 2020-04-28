@@ -4,14 +4,17 @@
 
 .NavigationItemsMobile{
     margin:0;
-    padding-left: 9px;
     list-style:none;
     display: flex;
     flex-flow: column;
-    /* align-items: center; */
-    justify-content: center;
+    position: fixed;
+    /* justify-content: center; */
     height: 100%;
+    width: 100%;
+    z-index: 100;
+    background-color: lightgrey;
     transition: transform 0.3s ease-out;
+    box-sizing: border-box;
 }
 
 

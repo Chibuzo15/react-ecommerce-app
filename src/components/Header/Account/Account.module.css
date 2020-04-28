@@ -6,12 +6,15 @@
     display: flex;
 }
 
-.CartIcon{
-    display: block;
-    padding: 7px;
+.Icon{
+    display: inline;
 }
 
-@media screen and (min-width: 400px){
+.Wrapper{
+    display: flex;
+}
+
+@media screen and (min-width: 420px){
     .Accountbar{
         list-style: none;
         display:flex;
@@ -19,7 +22,7 @@
         padding: 15px
     }
 
-    .CartIcon{
+    .Icon{
         display: none;
     }
 }
