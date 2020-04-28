@@ -1,0 +1,12 @@
+.Logo{
+    width: 180px;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+@media screen and (min-width: 400px){
+    .Logo{
+        width: 230px;
+        padding: 10px;
+    }
+}

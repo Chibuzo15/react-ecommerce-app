@@ -1,0 +1,41 @@
+.NavigationItems{
+    display: none;
+}
+
+.NavigationItemsMobile{
+    margin:0;
+    padding-left: 9px;
+    list-style:none;
+    display: flex;
+    flex-flow: column;
+    /* align-items: center; */
+    justify-content: center;
+    height: 100%;
+    transition: transform 0.3s ease-out;
+}
+
+
+.Open{
+    transform: translateX(0%);
+}
+
+.Close{
+    transform: translateX(-100%);
+}
+
+@media (min-width: 500px){
+    .NavigationItemsMobile{
+        display: none;
+    }
+
+    .NavigationItems{
+        margin:0;
+        padding:0;
+        list-style:none;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+}

@@ -1,0 +1,25 @@
+.Accountbar{
+    display: none;
+}
+
+.Accountbarmobile{
+    display: flex;
+}
+
+.CartIcon{
+    display: block;
+    padding: 7px;
+}
+
+@media screen and (min-width: 400px){
+    .Accountbar{
+        list-style: none;
+        display:flex;
+        justify-content: space-around;
+        padding: 15px
+    }
+
+    .CartIcon{
+        display: none;
+    }
+}
