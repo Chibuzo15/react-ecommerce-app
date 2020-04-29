@@ -1,12 +1,26 @@
 .Button{
-    padding: 20px;
+    padding: 3px;
     box-sizing: border-box;
     background-color: none;
     border-width: 0px;
+    width: 130px;
+    height: 40px;
+    font-family: 'Lato', sans-serif;
 }
 
+/* Shop related */
+.Cart{
+    background-color: black;
+    color: white;
+    
+
+}
+
+/* 
+MISC
+*/
 .HomeCarousel{
-    background-color: darkgrey;
+    background-color: #ffffffa3;
     justify-content: center;
     margin: auto;
 }
@@ -16,8 +30,13 @@
     margin: auto;
 }
 
+/* responsiveness */
 @media screen and (min-width: 420px){
     .Button{
+        width: 200px;
+        height: 60px
+    }
+    .Newsletter{
         width: 300px
     }
 }

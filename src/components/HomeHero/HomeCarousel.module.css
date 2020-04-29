@@ -1,5 +1,5 @@
 .SliderWrapper{
-    height:25vh;
+    height:60vh;
 }
 
 .slider1{
@@ -17,7 +17,7 @@
 
 @media screen and( min-width: 400px){
     .SliderWrapper{
-        height:auto;
+        height:40vh;
     }
 
     .slider1{

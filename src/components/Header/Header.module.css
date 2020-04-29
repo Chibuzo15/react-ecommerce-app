@@ -7,3 +7,18 @@
     display:flex;
     box-sizing: border-box;
 }
+
+.Drawer{
+    width:20%;
+    margin: auto
+}
+
+.Logo{
+    width: 80%;
+    margin: auto;
+}
+
+.AccountBar{
+    width: 20%;
+    margin: auto;
+}

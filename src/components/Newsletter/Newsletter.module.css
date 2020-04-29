@@ -3,14 +3,16 @@
     padding: 2rem 0;
     display: block;
     text-align: center;
-    margin: 21px;
+    margin: 5px;
     display: flex;
     flex-flow: column;
     justify-content: space-evenly;
+    font-family: 'Lato', sans-serif;
 }
 
 .NewsletterInput{
     margin: auto;
     height: 40px;
-    width:80%
+    width:80%;
+    font-family: 'Lato', sans-serif;
 }

@@ -100,6 +100,9 @@
     transform: translate(-7px,0);
   }
   
+  .Wrapper{
+    width:100%
+  }
 
 @media (min-width: 500px) {
     .DrawerToggle {

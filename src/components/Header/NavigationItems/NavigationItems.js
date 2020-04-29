@@ -13,24 +13,28 @@ const navigationItems = (props) => {
 
     const NavigationItemsARR = [
         {
-            name: 'whats new'
+            name: 'whats new',
+            link: '/whats-new'
         },
         {
-            name: 'dresses'
+            name: 'dresses',
+            link: '/dresses'
         },
         {
-            name: 'lookbook'
+            name: 'lookbook',
+            link: '/lookbook'
         },
         {
-            name: 'campaign'
-        },
-        {
-            name: 'sale'
+            name: 'sale',
+            link: '/sale'
         },
     ]
 
     const NavigationItems = NavigationItemsARR.map(nav => {
-        return <NavigationItem key={nav.name}> {nav.name.toUpperCase()} </NavigationItem>
+        return <NavigationItem 
+        clicked={props.clicked}
+        link={nav.link}
+        key={nav.name}> {nav.name.toUpperCase()} </NavigationItem>
     })
 
     return (

@@ -12,6 +12,7 @@
 
 .Wrapper{
     display: flex;
+    width:100%;
 }
 
 @media screen and (min-width: 420px){

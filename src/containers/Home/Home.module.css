@@ -1,0 +1,9 @@
+.HomeWrapper{
+    margin: 20px
+}
+
+@media screen and (min-width: 430px){
+    .HomeWrapper{
+        margin: 0
+    }
+}

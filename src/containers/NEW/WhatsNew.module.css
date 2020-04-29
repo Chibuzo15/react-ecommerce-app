@@ -1,0 +1,38 @@
+.PageWrapper{
+    display:flex;
+    flex-flow: wrap;
+}
+
+.PageTitle{
+    color: #333;
+    font-size: 22px;
+    font-family: 'Lato', sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.Filter{
+    width: 100%
+}
+
+.Catalog{
+    width:100%
+}
+
+@media screen and (min-width: 430px){
+    .PageTitle{
+        font-size: 28px;
+    }
+
+    .PageWrapper{
+        flex-wrap: nowrap ;
+    }
+    
+    .Filter{
+        width: 22%
+    }
+
+    .Catalog{
+        width:78%
+    }
+}

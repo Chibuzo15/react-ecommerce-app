@@ -9,10 +9,12 @@ const drawerToggle = (props) => {
     }
     
     return(
-        <div className={attachClasses} onClick={props.clicked}>
-            <span></span>
-            <span></span>
-            <span></span>
+        <div className={classes.Wrapper}>
+            <div className={attachClasses} onClick={props.clicked}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     )
     

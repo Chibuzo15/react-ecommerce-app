@@ -15,6 +15,7 @@
     background-color: lightgrey;
     transition: transform 0.3s ease-out;
     box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
 }
 
 
@@ -40,5 +41,6 @@
         align-items: center;
         justify-content: center;
         height: 100%;
+        font-family: 'Lato', sans-serif;
     }
 }

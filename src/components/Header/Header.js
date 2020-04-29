@@ -21,15 +21,17 @@ class Header extends Component {
         return (
             <div className={classes['Header']}>
                 <div className= {classes['Topbar']}>
-                    <DrawerToggle
-                    clicked = {this.drawerToggleHandler}
-                    showMenu = {this.state.clickedToggle}
-                    />
-                    <Logo/>
-                    <AccountBar/>
+                    <span className={classes.Drawer}>
+                        <DrawerToggle
+                        clicked = {this.drawerToggleHandler}
+                        showMenu = {this.state.clickedToggle}
+                        /></span>
+                    <span className={classes.Logo}><Logo/></span>
+                    <span className={classes.AccountBar}><AccountBar/></span>
                 </div>
                 <div>
                     <NavigationItems
+                    clicked = {this.drawerToggleHandler}
                     showMobile = {this.state.clickedToggle}
                     />
                 </div>

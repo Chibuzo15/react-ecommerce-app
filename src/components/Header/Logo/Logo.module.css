@@ -1,12 +1,13 @@
 .Logo{
-    width: 180px;
+    width: 100%;
+    max-width: 180px;
     box-sizing: border-box;
     margin: auto;
 }
 
 @media screen and (min-width: 400px){
     .Logo{
-        width: 230px;
+        max-width: 230px;
         padding: 10px;
     }
 }
