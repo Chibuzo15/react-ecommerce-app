@@ -18,6 +18,19 @@
     font-family: 'Lato', sans-serif;
 }
 
+.Accountbarmobile{
+    margin-top: 40px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+    font-family: 'Lato', sans-serif;
+}
+
+.Icon{
+    padding: 3px;
+    font-size: 22px;
+    box-sizing: border-box;
+}
 
 .Open{
     transform: translateX(0%);

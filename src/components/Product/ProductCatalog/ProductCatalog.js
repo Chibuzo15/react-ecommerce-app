@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductBox from '../ProductBox/ProductBox';
 import classes from './ProductCatalog.module.css';
+import SingleProduct from '../singleProductPage/singleProduct';
 
 const productCatalog = (props) => {
     return(

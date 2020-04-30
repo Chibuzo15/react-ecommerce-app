@@ -1,9 +1,15 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 
 import NavigationItem from './NavgationItem/NavigationItem';
 import classes from './NavigationItems.module.css';
 
-const navigationItems = (props) => {
+// get our fontawesome imports
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const NavigationItems = (props) => {
+
     // ...
     let attachClasses = [classes['NavigationItemsMobile'], classes['Close']];
 
@@ -30,12 +36,26 @@ const navigationItems = (props) => {
         },
     ]
 
-    const NavigationItems = NavigationItemsARR.map(nav => {
+    let NavigationItems = NavigationItemsARR.map(nav => {
         return <NavigationItem 
         clicked={props.clicked}
         link={nav.link}
         key={nav.name}> {nav.name.toUpperCase()} </NavigationItem>
     })
+
+    if (props.showMobile){
+        //Add account icon to menu
+        NavigationItems.push(
+            <NavLink 
+            onClick={props.clicked}
+            to='/login'
+            key='icons' 
+            className={classes['Accountbarmobile']}>
+                <span>< FontAwesomeIcon className={classes['Icon']} icon={faUser} />SIGN IN</span>
+            </NavLink>
+        )
+    }
+
 
     return (
         <div>
@@ -51,4 +71,4 @@ const navigationItems = (props) => {
     )
 }
 
-export default navigationItems
+export default NavigationItems
