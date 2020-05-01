@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 import Button from '../../../components/UI/Button/button';
 import classes from './LoginPage.module.css';
@@ -7,18 +8,37 @@ import { NavLink } from 'react-router-dom'
 import * as actionTypes from '../../../store/actions'
 
 class LoginPage extends Component{
+    state={
+        email : '',
+        password : '',
+    }
     
+
+    handlePassChange = (event) => {
+        this.setState({password: event.target.value})
+    }
+
+    handleEmailChange = (event) => {
+        this.setState({email : event.target.value})
+    }
+
     render(){
-        console.log(this.props.loggedIn)
+        if (this.props.loggedIn) {
+            return <Redirect to="/" />;
+        }
         return(
             <div className={classes.PageWrapper}>
                 <input 
+                onChange={this.handleEmailChange}
+                value={this.state.email}
                 className={classes.Input}
                 type='email' 
                 name='email'
                 placeholder='Email address'
                 />
                 <input 
+                onChange={this.handlePassChange}
+                value={this.state.password}
                 className={classes.Input}
                 type='password' 
                 name='password'
@@ -32,7 +52,7 @@ class LoginPage extends Component{
                     </NavLink>
                 </div>
                 <Button
-                handleClick={this.props.login}
+                handleClick={() => this.props.login(this.state)}
                 btnType='Cart'
                 >
                     SIGN IN
@@ -58,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        login: () => dispatch({type: actionTypes.LOGIN})
+        login: (userObj) => dispatch({type: actionTypes.LOGIN, userObj: userObj})
     }
 }
 

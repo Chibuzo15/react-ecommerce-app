@@ -8,6 +8,7 @@ import WhatsNew from './containers/NEW/WhatsNew';
 import SingleProduct from './components/Product/singleProductPage/singleProduct';
 import LoginPage from './containers/Account/LoginPage/LoginPage';
 import SignUpPage from './containers/Account/SignUpPage/SignUpPage';
+import Profile from './containers/Account/Profile/Profile';
 
 function App(props) {
   return (
@@ -22,6 +23,7 @@ function App(props) {
         component={SingleProduct}/>
         <Route path='/login' exact component={LoginPage} />
         <Route path='/signup' exact component={SignUpPage} />
+        <Route path='/my-account' exact component={Profile} />
     </Layout>
   );
 }

@@ -1,0 +1,45 @@
+.ProfilePage{
+
+}
+
+.PageTitle{
+    font-size: 22px;
+}
+
+.Wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Options{
+    width: 100%;
+    margin: 5px
+}
+
+.Options div{
+    height: 40px;
+    padding: 10px;
+    border: 1px solid blue;
+    box-sizing: border-box;
+}
+
+.OptionDetails{
+    display: none;
+}
+
+@media screen and (min-width: 430px){
+    .Options{
+        width: 30%;
+        border: 1px solid red
+    }
+
+    .Options div{
+        height: 60px;
+    }
+    
+    .OptionDetails{
+        width:70%;
+        display: block;
+        border: 1px solid red;
+    }
+}
