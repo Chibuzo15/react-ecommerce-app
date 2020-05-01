@@ -36,9 +36,10 @@ const NavigationItems = (props) => {
         },
     ]
 
+    //Navigation items array
     let NavigationItems = NavigationItemsARR.map(nav => {
         return <NavigationItem 
-        clicked={props.clicked}
+        clicked={props.showMobile ? props.clicked : null}
         link={nav.link}
         key={nav.name}> {nav.name.toUpperCase()} </NavigationItem>
     })
@@ -47,7 +48,8 @@ const NavigationItems = (props) => {
         //Add account icon to menu
         NavigationItems.push(
             <NavLink 
-            onClick={props.clicked}
+            //only set Onclick to click prop if show mobile is true
+            onClick={props.showMobile ? props.clicked : null}
             to='/login'
             key='icons' 
             className={classes['Accountbarmobile']}>
@@ -63,7 +65,7 @@ const NavigationItems = (props) => {
                 {NavigationItems}
             </ul>
             <ul className={attachClasses.join(' ')}>
-            {NavigationItems}
+                {NavigationItems}
             </ul>
         </div>
         

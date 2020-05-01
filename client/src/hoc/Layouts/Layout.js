@@ -8,7 +8,6 @@ import { showSearch } from '../../store/actions';
 class Layout extends Component{
 
     render(){
-        console.log('show search',this.props.showSearch)
         return(
             <div>
                 <Header/>
