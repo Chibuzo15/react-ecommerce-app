@@ -1,0 +1,12 @@
+.CartItem{
+    height: 80px;
+    margin: 3px 7px 3px 7px;
+    padding: 7px;
+    border: 1px solid rgb(153, 153, 153);
+    box-shadow: gray;
+    box-sizing: border-box;
+}
+
+.Remove{
+    float: right;
+}

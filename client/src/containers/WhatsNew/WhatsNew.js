@@ -4,9 +4,38 @@ import classes from './WhatsNew.module.css';
 // import product1 from '../../assets/images/Products/suit-1.jpg'
 // import product2 from '../../assets/images/Products/suit-2.jpg'
 // import product3 from '../../assets/images/Products/suit-3.jpg'
+import axios from 'axios';
 
 class WhatsNew extends Component{
+    state = {
+        products : null
+    }
+
+    componentDidMount(){
+        this.getProducts()
+    }
+
+    getProducts = () => {
+        axios.get('/api/products')
+        .then(res => {
+            console.log(res.data)
+            const product = res.data.map(product => {
+                return {
+                    id : product._id,
+                    name : product.name,
+                    price: product.price,
+                    desc: product.description
+                }
+            })
+            this.setState({
+                products : product
+            })
+        })
+        .catch(err => console.log(err))
+    }
+
     render(){
+        console.log(this.state.products)
         return(
             <div >
                 <div className={classes.PageTitle}>
@@ -18,6 +47,7 @@ class WhatsNew extends Component{
                     </div>
                     <div className={classes.Catalog}>
                     <ProductCatalog
+                    products = {this.state.products}
                     />
                     </div>
                 </div>

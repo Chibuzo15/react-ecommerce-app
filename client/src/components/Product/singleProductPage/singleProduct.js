@@ -3,23 +3,25 @@ import classes from './singleProduct.module.css';
 import Button from '../../UI/Button/button';
 import product3 from '../../../assets/images/Products/suit-3.jpg';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import {addToCart, removeFromCart} from '../../../store/actions';
 
 const singleProduct = (props) => {
+    console.log(props.cartItems)
     return(
         <div className={classes.Wrapper}>
             <div className={classes.ProductDetails}>
                 <span className={classes.ProductTitle}> 
-                    Sleek Dress
+                    {props.location.state.name}
                 </span>
                 <span className={classes.productExcerpts}>
-                Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Etiam pulvinar aliquet ligula vel consequat. Mauris pharetra sapien fermentum, pretium justo et, maximus lorem. Sed bibendum dui metus, 
-                nec porta neque molestie pulvinar
+                    {props.location.state.desc}
                 </span>
                 <span className={classes.Price}>
-                ₦5000
+                        {props.location.state.price}
                 </span>
                 <Button
+                    handleClick = {() => props.onAddToCart(props.location.state.name)}
                     btnType='Cart'
                 >
                     BUY NOW
@@ -35,4 +37,16 @@ const singleProduct = (props) => {
     )
 }
 
-export default withRouter(singleProduct);
+const mapStateToProps = state => {
+    return{
+        cartItems : state.cartItems
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddToCart : (name) => dispatch(addToCart(name)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(singleProduct));

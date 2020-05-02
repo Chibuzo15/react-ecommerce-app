@@ -11,12 +11,11 @@ import product3 from '../../../assets/images/Products/suit-3.jpg'
 
 const ProductBox = (props) => {
     const history = useHistory()
-    
     return (
         <div 
         onClick={() => history.push({
             pathname: `${props.match.path}/productsingle`,
-            state: { id : "1444" }
+            state: { id : props.id, name : props.name, price: props.price, desc: props.desc }
         })}
         className={classes.ProductBox}>
             <img 
@@ -24,10 +23,10 @@ const ProductBox = (props) => {
             src={product3}
             />
             <div className={classes.ProductTitle}>
-                Sleek Men's suit
+                {props.name}
             </div>
             <div className={classes.Price}>
-                $120
+                {props.price}
             </div>
         </div>
     )

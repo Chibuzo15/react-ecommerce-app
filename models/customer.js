@@ -3,16 +3,27 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const ProductSchema = new Schema({
-  name: {
+  first_name: {
     type: String,
     required: [true, 'The product text field is required']
   },
-  price: {
-    type: Number,
+  last_name: {
+    type: String,
+    required: [true, 'The product text field is required']
+  },
+  email: {
+    type: String,
     required: true
   },
-  description: String,
-  date: { type: Date, default: Date.now },
+  address: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  },
+  date_joined: { type: Date, default: Date.now },
 })
 
 //create model for todo

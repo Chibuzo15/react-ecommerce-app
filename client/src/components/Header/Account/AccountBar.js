@@ -26,7 +26,9 @@ class AccountBar extends Component{
                 <li
                 onClick={() => {this.props.history.push('/login')}}
                 >SIGN IN</li>
-                <li>CART</li>
+                <li
+                onClick={() => {this.props.history.push('/cart')}}
+                >CART</li>
             </span>
         //if user is logged in replace Sign Up button with My-account
         if(this.props.loggedIn){
@@ -34,7 +36,9 @@ class AccountBar extends Component{
                     <li
                     onClick={() => {this.props.history.push('/my-account')}}
                     >MY ACCOUNT</li>
-                    <li>CART</li>
+                    <li
+                    onClick={() => {this.props.history.push('/cart')}}
+                    >CART</li>
                 </span>
         }
 
@@ -48,7 +52,9 @@ class AccountBar extends Component{
                     onClick={this.props.onClickSearch}
                     className={classes['Icon']} 
                     icon={faSearch} />
-                    <FontAwesomeIcon className={classes['Icon']} icon={faShoppingBasket} />
+                    <FontAwesomeIcon 
+                    onClick={() => {this.props.history.push('/cart')}}
+                    className={classes['Icon']} icon={faShoppingBasket} />
                 </div>
                 
             </div>

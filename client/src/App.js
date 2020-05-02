@@ -9,6 +9,7 @@ import SingleProduct from './components/Product/singleProductPage/singleProduct'
 import LoginPage from './containers/Account/LoginPage/LoginPage';
 import SignUpPage from './containers/Account/SignUpPage/SignUpPage';
 import Profile from './containers/Account/Profile/Profile';
+import Cart from './containers/Cart/Cart';
 
 function App(props) {
   return (
@@ -24,6 +25,7 @@ function App(props) {
         <Route path='/login' exact component={LoginPage} />
         <Route path='/signup' exact component={SignUpPage} />
         <Route path='/my-account' exact component={Profile} />
+        <Route path='/cart' exact component={Cart} />
     </Layout>
   );
 }
