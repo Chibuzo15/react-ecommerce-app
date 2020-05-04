@@ -17,6 +17,7 @@ router.get('/users', (req, res, next) => {
     .catch(next)
 })
 
+//POST for products
 router.post('/products', (req, res, next) => {
   if(req.body.name){
     Product.create(req.body)
@@ -43,7 +44,9 @@ router.post('/users', (req, res, next) => {
   }
 });
 
+//DELETE product
 router.delete('/products/:id', (req, res, next) => {
+  console.log(req.params)
   Product.findOneAndDelete({"_id": req.params.id})
     .then(data => res.json(data))
     .catch(next)

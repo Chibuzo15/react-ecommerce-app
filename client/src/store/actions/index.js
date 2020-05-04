@@ -1,1 +1,8 @@
-export {addToCart, removeFromCart, logout, showSearch, getProducts} from './actionCreator';
+export {addToCart, 
+    removeFromCart, 
+    logout, 
+    showSearch, 
+    getProducts,
+    deleteProduct,
+    addProduct
+} from './actionCreator';

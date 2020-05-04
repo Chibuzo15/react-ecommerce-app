@@ -3,4 +3,25 @@
     padding: 10px;
     margin-bottom: 7px;
     box-sizing: border-box;
+    margin: 10px;
+    background-color: rgb(194, 194, 194);
+}
+
+.Actions{
+    display: flex;
+    width: 30%;
+    border: 1px solid red;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+}
+
+.Actions div{
+    padding: 5px;
+    border: 1px solid rgb(138, 137, 137);
+    box-sizing: border-box;
+}
+
+.Actions div:hover{
+    border: 1px solid rgb(49, 49, 49);
+    box-sizing: border-box;
 }

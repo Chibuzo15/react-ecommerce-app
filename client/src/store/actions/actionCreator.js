@@ -49,3 +49,58 @@ export function getProducts() {
             dispatch(getProductsFailed()) })
     }
 }
+
+export const deleteProductSuccess = () => {
+    return {
+        type: actionTypes.DELETE_PRODUCT_SUCCESS,
+    }
+} 
+
+export const deleteProductFailed = () => {
+    return {
+        type: actionTypes.DELETE_PRODUCT_FAILED
+    }
+}
+
+export const deleteProduct = (id) => {
+    return dispatch => {
+        axios.delete(`/api/products/${id}`)
+            .then(res => {
+                dispatch(deleteProductSuccess())
+            })
+            .catch((error) => {
+                dispatch(getProductsFailed()) })
+    }
+}
+
+export const addProductSuccess = (product) => {
+    return {
+        type: actionTypes.ADD_PRODUCT_SUCCESS,
+        product: product
+    }
+} 
+
+export const addProductsFailed = () => {
+    return {
+        type: actionTypes.ADD_PRODUCT_FAILED
+    }
+}
+
+export const addProduct = (product) => {
+    return dispatch => {
+        axios.post('/api/products/', product)
+            .then(res => {
+                console.log(product)
+                console.log('This is the response', res)
+                let product = {
+                    id : res.data._id,
+                    name : res.data.name,
+                    price: res.data.price,
+                    desc: res.data.description
+                }
+                dispatch(addProductSuccess(product))
+            })
+            .catch((error) => {
+                dispatch(addProductsFailed()) })
+    }
+}

@@ -7,6 +7,7 @@ const initialState = {
     cartItems: [],
     products: null,
     products_error : false,
+    admin_error : true
 }
 
 function removeCartItem(array, action) {
@@ -50,6 +51,25 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 products_error: true,
+            }
+        case actionTypes.ADD_PRODUCT_SUCCESS:
+            return{
+                ...state,
+                products: state.products.concat(action.product)
+            }
+        case actionTypes.ADD_PRODUCT_FAILED:
+            return{
+                ...state,
+                products_error: true,
+            } 
+        case actionTypes.DELETE_PRODUCT_SUCCESS:
+                return{
+                    ...state,
+                } 
+        case actionTypes.DELETE_PRODUCT_FAILED:
+            return{
+                ...state,
+                admin_error: true,
             } 
         default:
             return state;

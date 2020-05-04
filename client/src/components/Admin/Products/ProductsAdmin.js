@@ -11,7 +11,9 @@ const ProductsAdmin = () => {
             <div 
             onClick = {() => history.push('/site-admin/products')}
             >View Products</div>
-            <div>Add new product</div>
+            <div
+            onClick = {() => history.push('/site-admin/products/new')}
+            >Add new product</div>
         </div>
     )
 }
