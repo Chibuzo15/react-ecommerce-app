@@ -4,7 +4,7 @@ import Button from '../../UI/Button/button';
 import product3 from '../../../assets/images/Products/suit-3.jpg';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import {addToCart, removeFromCart} from '../../../store/actions';
+import {addToCart, removeFromCart} from '../../../store/actions/index';
 
 const singleProduct = (props) => {
     console.log(props.cartItems)

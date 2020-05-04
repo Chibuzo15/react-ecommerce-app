@@ -2,13 +2,18 @@ import React from 'react';
 
 import classes from './Cart.module.css';
 import CartItem from './CartItem/CartItem';
+import Button from '../../components/UI/Button/button';
 
 import { connect } from 'react-redux';
-import { removeFromCart } from '../../store/actions';
+import { useHistory } from 'react-router-dom'
+import { removeFromCart } from '../../store/actions/index';
 
 const Cart = (props) => {
-    let buildCart = null;
-    if(props.cartItems){
+    const history = useHistory();
+
+    let buildCart = <div className={classes.EmptyText}>Cart is currently empty</div>;
+
+    if(props.cartItems.length > 0){
         buildCart = props.cartItems.map(item => {
             return <CartItem
             key = {item}
@@ -20,6 +25,13 @@ const Cart = (props) => {
     return(
         <div>
             {buildCart}
+            {
+            props.cartItems.length > 0 ? <Button
+            btnType='Cart'
+            handleClick = {() => history.push('/checkout')}
+            >
+            PROCEED TO CHECKOUT
+            </Button> : null }
         </div>
     )
 }

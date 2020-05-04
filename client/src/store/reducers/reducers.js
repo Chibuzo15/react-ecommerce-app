@@ -1,10 +1,12 @@
-import * as actionTypes from './actions';
+import * as actionTypes from '../actions/actions';
 
 const initialState = {
     loggedIn: false,
     user: null,
     showSearch: false,
-    cartItems: []
+    cartItems: [],
+    products: null,
+    products_error : false,
 }
 
 function removeCartItem(array, action) {
@@ -35,10 +37,19 @@ const reducer = (state = initialState, action) => {
                 cartItems: [...state.cartItems, action.product_id]
             }
         case actionTypes.REMOVE_FROM_CART:
-            
             return{
                 ...state,
                 cartItems: removeCartItem(state.cartItems, action.product_id)
+            } 
+        case actionTypes.GET_PRODUCTS_SUCCESS:
+            return{
+                ...state,
+                products : action.products
+            } 
+        case actionTypes.GET_PRODUCTS_FAILED:
+            return{
+                ...state,
+                products_error: true,
             } 
         default:
             return state;

@@ -24,3 +24,5 @@ yarn-error.log*
 
 
 /src/assets/images
+
+/src/hoc/Aux.js

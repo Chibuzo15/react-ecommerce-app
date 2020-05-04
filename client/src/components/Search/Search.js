@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Search.module.css';
 
 import { connect } from 'react-redux';
-import { showSearch } from '../../store/actions';
+import { showSearch } from '../../store/actions/index';
 
 const search = (props) => {
     let attachClasses = classes.Search

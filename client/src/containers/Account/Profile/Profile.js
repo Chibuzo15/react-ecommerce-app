@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { logout } from '../../../store/actions';
+import { logout } from '../../../store/actions/index';
 
 import classes from './Profile.module.css';
 import Button from '../../../components/UI/Button/button';

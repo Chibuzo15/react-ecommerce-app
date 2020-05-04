@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
 import ProductCatalog from '../../components/Product/ProductCatalog/ProductCatalog';
 import classes from './WhatsNew.module.css';
-// import product1 from '../../assets/images/Products/suit-1.jpg'
-// import product2 from '../../assets/images/Products/suit-2.jpg'
-// import product3 from '../../assets/images/Products/suit-3.jpg'
-import axios from 'axios';
+import Spinner from '../../components/UI/Spinner/Spinner';
+
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 class WhatsNew extends Component{
     state = {
@@ -12,30 +12,12 @@ class WhatsNew extends Component{
     }
 
     componentDidMount(){
-        this.getProducts()
-    }
-
-    getProducts = () => {
-        axios.get('/api/products')
-        .then(res => {
-            console.log(res.data)
-            const product = res.data.map(product => {
-                return {
-                    id : product._id,
-                    name : product.name,
-                    price: product.price,
-                    desc: product.description
-                }
-            })
-            this.setState({
-                products : product
-            })
-        })
-        .catch(err => console.log(err))
+        this.props.onGetProducts()
     }
 
     render(){
-        console.log(this.state.products)
+        let products = this.props.products ? <ProductCatalog products = {this.props.products} /> : <Spinner/> ;
+        
         return(
             <div >
                 <div className={classes.PageTitle}>
@@ -46,9 +28,7 @@ class WhatsNew extends Component{
                         Filter sidebar
                     </div>
                     <div className={classes.Catalog}>
-                    <ProductCatalog
-                    products = {this.state.products}
-                    />
+                    {products}
                     </div>
                 </div>
                 
@@ -58,4 +38,16 @@ class WhatsNew extends Component{
     }
 }
 
-export default WhatsNew;
+const mapStateToProps = state => {
+    return {
+        products : state.products
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetProducts : () => dispatch(actions.getProducts())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WhatsNew);

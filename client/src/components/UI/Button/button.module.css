@@ -8,12 +8,16 @@
     font-family: 'Lato', sans-serif;
 }
 
+.Button:disabled{
+    background-color: #a9a9a9ad;
+    color: #797171;
+    cursor: not-allowed;
+}
+
 /* Shop related */
 .Cart{
     background-color: black;
     color: white;
-    
-
 }
 
 /* 

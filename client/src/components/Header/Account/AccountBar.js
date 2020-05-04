@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { useHistory } from 'react-router-dom';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import {showSearch} from '../../../store/actions'
+import {showSearch} from '../../../store/actions/index';
 
 class AccountBar extends Component{
     // state={

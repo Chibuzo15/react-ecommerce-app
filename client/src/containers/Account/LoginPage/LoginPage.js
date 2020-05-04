@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import Button from '../../../components/UI/Button/button';
 import classes from './LoginPage.module.css';
 import { NavLink } from 'react-router-dom'
-import * as actionTypes from '../../../store/actions'
+import * as actionTypes from '../../../store/actions/actions'
 
 class LoginPage extends Component{
     state={

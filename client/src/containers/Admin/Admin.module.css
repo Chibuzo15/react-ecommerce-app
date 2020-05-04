@@ -1,0 +1,27 @@
+.AdminWrap{
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.SideBar{
+    width:100%;
+    box-sizing: border-box;
+}
+
+.content{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 430px){
+    .SideBar{
+        width:20%;
+        border: 1px solid rgba(133, 133, 133, 0.719)
+    }
+
+    .content{
+        width: 80%
+    }
+}
