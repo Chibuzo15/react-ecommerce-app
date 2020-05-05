@@ -4,3 +4,11 @@
     padding: 3px;
     box-sizing: border-box;
 }
+
+.View{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.View button{
+}

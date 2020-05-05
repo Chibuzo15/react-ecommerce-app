@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actions';
 
 const initialState = {
     loggedIn: false,
+    adminLoggedIn: false,
     user: null,
     showSearch: false,
     cartItems: [],
@@ -26,6 +27,17 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 loggedIn: false
+            }
+        case  actionTypes.ADMIN_LOGIN:
+            return{
+                ...state,
+                adminLoggedIn: true,
+                // user: action.userObj
+            }
+        case actionTypes.ADMIN_LOGOUT:
+            return{
+                ...state,
+                adminLoggedIn: false
             }
         case actionTypes.SHOW_SEARCH:
             return{

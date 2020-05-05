@@ -1,0 +1,17 @@
+.AdminPanel{
+    background-color: grey;
+}
+
+.PanelItems{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.PanelItems div {
+    padding: 3px
+}
+
+.PanelItems div:hover {
+    padding: 3px;
+    background-color: rgb(105, 105, 105);
+}

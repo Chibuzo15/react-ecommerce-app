@@ -10,10 +10,12 @@ import Checkout from '../containers/Checkout/Checkout';
 import Admin from '../containers/Admin/Admin';
 import AdminProducts from '../components/Admin/Products/Products/Products';
 import AddNewProduct from '../components/Admin/Products/AddNew/AddNew';
+import AdminLogin from '../components/Admin/AdminLoginPage/AdminLoginPage';
 
-import {Route, Switch} from 'react-router-dom';
+import {Route, Redirect, Switch} from 'react-router-dom';
+import { connect } from 'react-redux'
 
-const Routes = () => {
+const Routes = (props) => {
     return (
         <Aux>
             <Route 
@@ -26,14 +28,22 @@ const Routes = () => {
             <Route path='/cart' exact component={Cart} />
             <Route path='/checkout' exact component={Checkout} />
             <Route path='/site-admin' exact component={Admin} />
-
             <Switch>
-                <Route path='/site-admin/products/new'  component={AddNewProduct}/>
-                <Route path='/site-admin/products' component={AdminProducts}/>
+                <Route path='/site-admin/products' exact component={AdminProducts}/>
+                <Route path='/site-admin/products/new' exact component={AddNewProduct}/>
+                {/* <Route path="/site-admin">
+                    {props.adminLoggedIn ? <Redirect to="/dashboard" /> : <AdminLogin />}
+                </Route> */}
             </Switch>
             
         </Aux>
     )
 }
 
-export default Routes
+const mapStateToProps = state => {
+    return {
+        adminLoggedIn : state.adminLoggedIn
+    }
+}
+
+export default connect(mapStateToProps)(Routes);

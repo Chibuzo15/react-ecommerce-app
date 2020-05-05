@@ -5,6 +5,15 @@ export function logout() {
     return { type: actionTypes.LOGOUT }
   }
 
+export function adminLogin() {
+    return { type: actionTypes.ADMIN_LOGIN }
+  }
+
+export function adminLogout() {
+    return { type: actionTypes.ADMIN_LOGOUT }
+  }
+
+  
 export function showSearch() {
     return { type: actionTypes.SHOW_SEARCH}
 }

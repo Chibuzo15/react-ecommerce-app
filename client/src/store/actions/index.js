@@ -4,5 +4,7 @@ export {addToCart,
     showSearch, 
     getProducts,
     deleteProduct,
-    addProduct
+    addProduct,
+    adminLogin,
+    adminLogout
 } from './actionCreator';

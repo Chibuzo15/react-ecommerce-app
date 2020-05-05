@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/footer';
 import Search from '../../components/Search/Search';
-import { connect } from 'react-redux';
-import { showSearch } from '../../store/actions';
+
+// import { showSearch } from '../../store/actions';
+
+import { Route } from 'react-router-dom';
+import AdminLogin from '../../components/Admin/AdminLoginPage/AdminLoginPage';
+import AdminHeader from '../../components/Admin/AdminHeader/AdminHeader';
 
 class Layout extends Component{
 
     render(){
         return(
             <div>
+                <Route path="/site-admin/login" exact component={AdminLogin}/>
+                {this.props.adminLoggedIn ? <AdminHeader/> : null}
                 <Header/>
                     <Search
                     show={this.props.showSearch}
@@ -25,7 +33,8 @@ class Layout extends Component{
 
 const mapStateToProps = state => {
     return{
-        showSearch : state.showSearch
+        showSearch : state.showSearch,
+        adminLoggedIn : state.adminLoggedIn
     }
 }
 

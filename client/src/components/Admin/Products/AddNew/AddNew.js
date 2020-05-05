@@ -6,6 +6,9 @@ import Input from '../../../UI/Input/Input';
 import Spinner from '../../../UI/Spinner/Spinner';
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+import AdminProducts from '../Products/Products';
 
 class AddNew extends Component {
     state = {
@@ -40,7 +43,8 @@ class AddNew extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'textarea',
-                    placeholder: 'Product description'
+                    placeholder: 'Product description',
+                    style: { height : '150px'}
                 },
                 value: '',
                 validation:{
@@ -59,7 +63,7 @@ class AddNew extends Component {
         for (let formElementIdentifier in this.state.productForm){
             formData[formElementIdentifier] = this.state.productForm[formElementIdentifier].value;
         }
-        
+
             const productToAdd = {
                 name: formData.product_name,
                 price: formData.price,
@@ -146,22 +150,24 @@ class AddNew extends Component {
         if (this.props.loading){
             form = <Spinner/>;
         }
-
+        console.log(this.props.history)
 
         return (
             <div>
                 <div className={classes.Title}>Add new Product</div>
                 {form}
+                <div className={classes.View}>
+                    <Button
+                    handleClick = {() => this.props.history.push('/site-admin/products')}
+                    >
+                        VIEW ALL PRODUCTS
+                    </Button>
+                </div>
+                 
             </div>
         )
     }
 }
-// const addNew = (props) => {
-//     const productData = {
-//         
-//     }
-    
-// }
 
 const mapStateToProps = state => {
     return {
@@ -175,4 +181,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(AddNew);
+export default connect(null, mapDispatchToProps)(withRouter(AddNew));

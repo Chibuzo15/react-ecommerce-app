@@ -4,6 +4,7 @@ import classes from './Admin.module.css';
 import SideBarItem from '../../components/Admin/SideBarItem/SideBarItem';
 import Dashboard from '../../components/Admin/Dashboard/Dashboard';
 import ProductsAdmin from '../../components/Admin/Products/ProductsAdmin';
+// import { Redirect } from 'react-router-dom';
 
 class Admin extends Component {
     state = {
