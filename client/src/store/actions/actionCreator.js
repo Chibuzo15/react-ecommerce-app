@@ -90,7 +90,6 @@ export const addProduct = (product) => {
     return dispatch => {
         axios.post('/api/products/', product)
             .then(res => {
-                console.log(product)
                 console.log('This is the response', res)
                 let product = {
                     id : res.data._id,
