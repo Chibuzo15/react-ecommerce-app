@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const ImageSchema = new Schema({
+    _id: Schema.Types.ObjectId,
     url : { type : String},
     created : { type : Date, default : Date.now }
 })

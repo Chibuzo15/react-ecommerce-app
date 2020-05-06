@@ -1,4 +1,5 @@
 const express = require ('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 
 const Product = require('../models/product');
@@ -15,15 +16,47 @@ const Orderdetails = require('../models/order_details')
 
 router.get('/products', (req, res, next) => {
   Product.find({})
+    .populate('image')
     .then(data => res.json(data))
     .catch(next)
 });
 
+router.get('/products/:id', (req, res, next) => {
+  Product.findOne({"_id": req.params.id})
+    .populate('image')
+    .then((product) => {
+      res.json(product)
+    })
+    .catch((error) => {
+      res.send({error})
+    })
+});
+
 router.post('/products', (req, res, next) => {
-  if(req.body.name){
-    Product.create(req.body)
-      .then(data => res.json(data))
+  if(req.body){
+    
+    const image = new Image({
+      _id: new mongoose.Types.ObjectId(),
+      url: 'http://testurl.com',
+    });
+    const product = new Product({
+      AvailableSizes: [],
+      name: req.body.name,
+      price: req.body.price,
+      description: req.body.description,
+      image: image._id //Get the id from the image
+    });
+ 
+    product.save()  
+      .then(data => {
+        res.json(data)
+        image.save()
+          .then((data) => {
+            res.json(data)
+          }) 
+        })
       .catch(next)
+      
   }else {
     res.json({
       error: "The input field is empty"
@@ -62,9 +95,13 @@ router.post('/users', (req, res, next) => {
   //if name object is present in request body
   console.log('In post router')
   if(req.body.name){
-    User.create(req.body)
+    var user = new User(req.body);
+    user.save()
       .then(data => res.json(data))
       .catch(next)
+    // User.create(req.body)
+    //   .then(data => res.json(data))
+    //   .catch(next)
   }else {
     res.json({
       error: "The input field is empty"
@@ -101,5 +138,42 @@ router.get('/customers', (req, res, next) => {
   .then(data => res.json(data))
   .catch(next)
 });
+
+/*
+ ORDER API
+
+*/
+
+router.post('/orders', (req, res, next) => {
+  const order = new Order({
+    customer_id : '5eb2d34119a3d42094706b10',// get this from react frontend
+    order_status : 'processing' //get this from react
+  })
+  if(req.body){
+    order.save()
+      .then((data) => {
+        res.json(data)
+      })
+      .catch((error) => {
+        res.json(error)
+      })
+  }
+  else{
+    res.json({
+      error: 'Input field is empty'
+    })
+  }
+})
+
+router.get('/orders', (req, res, next) => {
+  Order.find({})
+    .populate('customer_id')
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((error) => {
+      res.json(error)
+    })
+})
 
 module.exports = router;

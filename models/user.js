@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //Define your User Collection Objects Structure
 //With datatypes
 //We'll be using Auth0 for authentication in the future.
-const user = new Schema({
+const userSchema = new Schema({
     //THis is where the user will login
     //For Now we will be inserting test data
     name: {
@@ -20,6 +20,6 @@ const user = new Schema({
     });
 
 //create model for todo
-const User = mongoose.model('user', user);
+const User = mongoose.model('user', userSchema);
  
 module.exports = User;
