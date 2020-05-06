@@ -13,9 +13,14 @@ const ProductSchema = new Schema({
   },
   description: String,
   date: { type: Date, default: Date.now },
+  image: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Image'
+  },
+  AvailableSizes: Array
 })
 
 //create model for todo
-const Product = mongoose.model('product', ProductSchema);
+const Product = mongoose.model('Product', ProductSchema);
 
 module.exports = Product;

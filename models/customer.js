@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //create schema for todo
-const ProductSchema = new Schema({
+const CustomerSchema = new Schema({
   first_name: {
     type: String,
-    required: [true, 'The product text field is required']
+    required: true
   },
   last_name: {
     type: String,
-    required: [true, 'The product text field is required']
+    required: true
   },
   email: {
     type: String,
@@ -27,6 +27,6 @@ const ProductSchema = new Schema({
 })
 
 //create model for todo
-const Product = mongoose.model('product', ProductSchema);
+const Customer = mongoose.model('Customer', CustomerSchema);
 
-module.exports = Product;
+module.exports = Customer;

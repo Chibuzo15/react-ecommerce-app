@@ -2,13 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //create schema for todo
-const ProductSchema = new Schema({
-  customer_id: { type: Schema.Types.ObjectId, ref: 'product' },
+const OrderSchema = new Schema({
+  customer_id: { 
+    type: Schema.Types.ObjectId,
+    ref: 'Customer' },
   order_date: { type: Date, default: Date.now },
-  order_status: String
+  order_status: { 
+    type: String,
+    default : 'pending',
+    enum : ['pending', 'processing', 'completed', 'cancelled']  
+  }
 })
 
 //create model for todo
-const Product = mongoose.model('product', ProductSchema);
+const Order = mongoose.model('Order', OrderSchema);
 
-module.exports = Product;
+module.exports = Order;
