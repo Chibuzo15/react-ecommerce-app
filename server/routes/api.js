@@ -2,12 +2,16 @@ const express = require ('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
+const _ = require('lodash')
+
 const Product = require('../models/product');
-const User = require('../models/user');
+const {User} = require('../models/user');
 const Customer = require('../models/customer');
 const Order = require('../models/order');
 const Image = require('../models/image');
 const Orderdetails = require('../models/order_details')
+
+const {authenticate, customerAuth} = require('../middleware/authenticate');
 
 /*
  PRODUCT API
@@ -93,12 +97,20 @@ router.delete('/products/:id', (req, res, next) => {
 
 router.post('/users', (req, res, next) => {
   //if name object is present in request body
-  console.log('In post router')
-  if(req.body.name){
-    var user = new User(req.body);
+  var body = _.pick(req.body, ['name', 'email', 'password']);
+  var user = new User(body);
+  
+  if(req.body){
     user.save()
-      .then(data => res.json(data))
-      .catch(next)
+      .then(() => {
+        return user.generateAuthToken();
+      })
+      .then((token) => {
+        res.header('x-auth', token).send(user);
+      })
+      .catch((e) => {
+        res.status(400).send(e)
+      })
     // User.create(req.body)
     //   .then(data => res.json(data))
     //   .catch(next)
@@ -109,10 +121,36 @@ router.post('/users', (req, res, next) => {
   }
 });
 
-router.get('/users', (req, res, next) => {
+router.get('/users', authenticate, (req, res, next) => {
   User.find({})
     .then(data => res.json(data))
     .catch(next)
+})
+
+router.get('/users/me', authenticate, (req, res) => {
+  res.send(req.user)
+});
+
+router.post('/users/login', (req, res) => {
+
+  var body = _.pick(req.body, ['email', 'password']);
+  
+  User.findByCredentials(body.email, body.password).then((user) => {
+      return user.generateAuthToken().then((token) => {
+          res.header('x-auth', token).send(user);
+      })
+  }).catch((e) => {
+      res.status(400).send(e);
+  });
+
+})
+
+router.delete('/users/me/token', authenticate, (req, res) => {
+  req.user.removeToken(req.token).then(() => {
+      res.status(200).send()
+  }, () => {
+      res.status(400).send()
+  })
 })
 
 /*
@@ -120,11 +158,19 @@ router.get('/users', (req, res, next) => {
 
 */
 router.post('/customers', (req, res, next) => {
+  var body = _.pick(req.body, ['first_name', 'last_name', 'state', 'address', 'email', 'password']);
+  var customer = new Customer(body)
   if(req.body){
-    Customer.create(req.body)
-      .then((data) => res.json(data))
+    customer.save()
+      .then(() => {
+        return customer.generateAuthToken();
+      })
+      .then((token) => {
+        res.header('x-auth', token).send(customer);
+      })
       .catch((error) => {
         console.log(error)
+        res.status(400).send()
       })
   }else{
     res.json({
@@ -133,12 +179,37 @@ router.post('/customers', (req, res, next) => {
   }
 });
 
-router.get('/customers', (req, res, next) => {
-  Customer.find({})
-  .then(data => res.json(data))
-  .catch(next)
+// router.get('/customers', (req, res, next) => {
+//   Customer.find({})
+//   .then(data => res.json(data))
+//   .catch(next)
+// });
+
+router.get('/customers/me', customerAuth, (req, res) => {
+  res.send(req.customer)
 });
 
+router.post('/customers/login', (req, res) => {
+
+  var body = _.pick(req.body, ['email', 'password']);
+  
+  Customer.findByCredentials(body.email, body.password).then((customer) => {
+      return customer.generateAuthToken().then((token) => {
+          res.header('x-auth', token).send(customer);
+      })
+  }).catch((e) => {
+      res.status(400).send(e);
+  });
+
+})
+
+router.delete('/customers/me/token', customerAuth, (req, res) => {
+  req.customer.removeToken(req.token).then(() => {
+      res.status(200).send()
+  }, () => {
+      res.status(400).send()
+  })
+})
 /*
  ORDER API
 
