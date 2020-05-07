@@ -17,7 +17,7 @@ function removeCartItem(array, action) {
 
 const reducer = (state = initialState, action) => {
     switch (action.type){
-        case  actionTypes.LOGIN:
+        case  actionTypes.LOGIN_SUCCESS:
             return{
                 ...state,
                 loggedIn: true,

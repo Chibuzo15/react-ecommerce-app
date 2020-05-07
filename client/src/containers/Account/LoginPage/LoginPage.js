@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import Button from '../../../components/UI/Button/button';
 import classes from './LoginPage.module.css';
 import { NavLink } from 'react-router-dom'
-import * as actionTypes from '../../../store/actions/actions'
+import * as actions from '../../../store/actions/index'
 
 class LoginPage extends Component{
     state={
@@ -78,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        login: (userObj) => dispatch({type: actionTypes.LOGIN, userObj: userObj})
+        login: (userObj) => dispatch(actions.login(userObj))
     }
 }
 

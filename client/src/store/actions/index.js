@@ -1,5 +1,6 @@
 export {addToCart, 
     removeFromCart, 
+    login,
     logout, 
     showSearch, 
     getProducts,
