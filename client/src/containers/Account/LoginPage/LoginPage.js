@@ -13,6 +13,10 @@ class LoginPage extends Component{
         password : '',
     }
     
+    handleLogin = () => {
+        this.props.login(this.state)
+        console.log('logging in')
+    }
 
     handlePassChange = (event) => {
         this.setState({password: event.target.value})
@@ -52,7 +56,7 @@ class LoginPage extends Component{
                     </NavLink>
                 </div>
                 <Button
-                handleClick={() => this.props.login(this.state)}
+                handleClick={this.handleLogin}
                 btnType='Cart'
                 >
                     SIGN IN
@@ -72,7 +76,7 @@ class LoginPage extends Component{
 
 const mapStateToProps = state => {
     return {
-        loggedIn : state.loggedIn
+        loggedIn : state.customer.loggedIn
     }
 }
 

@@ -195,16 +195,16 @@ class ContactData extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
+// const mapDispatchToProps = dispatch => {
+//     return {
     
-    }
-}
+//     }
+// }
 
-const mapStateToProps = state => {
-    return{
+// const mapStateToProps = state => {
+//     return{
        
-    }
-}
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactData);
+export default connect()(ContactData);

@@ -33,8 +33,8 @@ class Layout extends Component{
 
 const mapStateToProps = state => {
     return{
-        showSearch : state.showSearch,
-        adminLoggedIn : state.adminLoggedIn
+        showSearch : state.UI.showSearch,
+        adminLoggedIn : state.auth.adminLoggedIn
     }
 }
 

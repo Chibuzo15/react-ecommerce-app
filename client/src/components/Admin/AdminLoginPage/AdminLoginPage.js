@@ -34,7 +34,7 @@ class AdminLogin extends Component {
 
 const mapStateToProps = state => {
     return {
-        adminLoggedIn : state.adminLoggedIn
+        adminLoggedIn : state.auth.adminLoggedIn
     }
 }
 

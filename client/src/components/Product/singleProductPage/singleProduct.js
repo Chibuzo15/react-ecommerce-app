@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import {addToCart, removeFromCart} from '../../../store/actions/index';
 
 const singleProduct = (props) => {
-    console.log(props.cartItems)
     return(
         <div className={classes.Wrapper}>
             <div className={classes.ProductDetails}>
@@ -37,11 +36,6 @@ const singleProduct = (props) => {
     )
 }
 
-const mapStateToProps = state => {
-    return{
-        cartItems : state.cartItems
-    }
-}
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -49,4 +43,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(singleProduct));
+export default connect(null, mapDispatchToProps)(withRouter(singleProduct));

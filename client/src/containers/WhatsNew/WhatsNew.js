@@ -40,7 +40,7 @@ class WhatsNew extends Component{
 
 const mapStateToProps = state => {
     return {
-        products : state.products
+        products : state.products.products
     }
 }
 

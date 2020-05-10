@@ -169,12 +169,6 @@ class AddNew extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-
-    }
-}
-
 const mapDispatchToProps = dispatch => {
     return {
         onAddProduct : (product) => dispatch(actions.addProduct(product))

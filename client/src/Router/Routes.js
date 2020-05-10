@@ -42,7 +42,7 @@ const Routes = (props) => {
 
 const mapStateToProps = state => {
     return {
-        adminLoggedIn : state.adminLoggedIn
+        adminLoggedIn : state.auth.adminLoggedIn
     }
 }
 

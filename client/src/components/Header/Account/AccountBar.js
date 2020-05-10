@@ -64,8 +64,8 @@ class AccountBar extends Component{
 
 const mapStateToProps = state => {
     return {
-        loggedIn : state.loggedIn,
-        showSearch : state.showSearch
+        loggedIn : state.customer.loggedIn,
+        showSearch : state.UI.showSearch
     }
 }
 

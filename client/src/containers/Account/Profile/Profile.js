@@ -37,8 +37,8 @@ class Profile extends Component{
 }
 const mapStateToProps = state => {
     return {
-        loggedIn : state.loggedIn,
-        userObj : state.user
+        loggedIn : state.customer.loggedIn,
+        userObj : state.customer.user
     }
 }
 const mapDispatchToProps = {
