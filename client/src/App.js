@@ -13,6 +13,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.onTryAutoSignUp()
+    this.props.onTryAutoCustomerSignUp()
   }
 
   render() {
@@ -31,7 +32,8 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignUp: () => dispatch(actions.adminAuthCheckState())
+    onTryAutoSignUp: () => dispatch(actions.adminAuthCheckState()),
+    onTryAutoCustomerSignUp: () => dispatch(actions.customerAuthCheckState())
   }
 }
 

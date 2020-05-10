@@ -182,12 +182,6 @@ router.post('/customers', (req, res, next) => {
   }
 });
 
-// router.get('/customers', (req, res, next) => {
-//   Customer.find({})
-//   .then(data => res.json(data))
-//   .catch(next)
-// });
-
 router.get('/customers/me', customerAuth, (req, res) => {
   res.send(req.customer)
 });
@@ -198,7 +192,10 @@ router.post('/customers/login', (req, res) => {
   
   Customer.findByCredentials(body.email, body.password).then((customer) => {
       return customer.generateAuthToken().then((token) => {
-          res.header('x-auth', token).send(customer);
+          res.header('x-auth', token).send({
+            customer,
+            token
+          });
       })
   }).catch((e) => {
       res.status(401).send(e);

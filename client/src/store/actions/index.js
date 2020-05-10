@@ -17,7 +17,8 @@ export {
 
 export {
     login,
-    logout
+    logout,
+    customerAuthCheckState
 } from './customer';
 
 export {
