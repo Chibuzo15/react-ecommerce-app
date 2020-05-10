@@ -1,11 +1,34 @@
-export {addToCart, 
+// export {addToCart, 
+//     removeFromCart, 
+//     login,
+//     logout, 
+//     showSearch, 
+//     getProducts,
+//     deleteProduct,
+//     addProduct,
+//     adminLogin,
+//     adminLogout
+// } from './actionCreator';
+
+export {
+    addToCart, 
     removeFromCart, 
+} from './cart';
+
+export {
     login,
-    logout, 
-    showSearch, 
+    logout
+} from './customer';
+
+export {
     getProducts,
     deleteProduct,
     addProduct,
+} from './products';
+
+export {
     adminLogin,
     adminLogout
-} from './actionCreator';
+} from './authAdmin';
+
+export { showSearch } from './UI';

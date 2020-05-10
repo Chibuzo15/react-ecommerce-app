@@ -1,57 +1,6 @@
 import * as actionTypes from './actions';
 import axios from '../../axios';
 
-export const login = (userObj) => {
-    return dispatch => {
-        axios.post('/api/users/login', userObj)
-        .then(res => {
-            dispatch(loginSuccess(res.data))
-            
-        })
-        .catch((error) => {
-            dispatch(loginFailed()) 
-        })
-    }
-}
-
-export const loginSuccess = (userObj) => {
-    return {
-        type: actionTypes.LOGIN_SUCCESS,
-        userObj
-    }
-}
-
-export const loginFailed = () => {
-    return {
-        type: actionTypes.LOGIN_FAILED
-    }
-}
-
-export function logout() {
-    return { type: actionTypes.LOGOUT }
-  }
-
-export function adminLogin() {
-    return { type: actionTypes.ADMIN_LOGIN }
-  }
-
-export function adminLogout() {
-    return { type: actionTypes.ADMIN_LOGOUT }
-  }
-
-  
-export function showSearch() {
-    return { type: actionTypes.SHOW_SEARCH}
-}
-
-export function addToCart(id) {
-    return { type: actionTypes.ADD_TO_CART, product_id : id}
-}
-
-export function removeFromCart(id) {
-    return { type: actionTypes.REMOVE_FROM_CART, product_id : id}
-}
-
 export const getProductsSuccess = (products) => {
     return {
         type: actionTypes.GET_PRODUCTS_SUCCESS,
