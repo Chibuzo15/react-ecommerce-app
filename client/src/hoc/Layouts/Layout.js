@@ -11,13 +11,18 @@ import { Route } from 'react-router-dom';
 import AdminLogin from '../../components/Admin/AdminLoginPage/AdminLoginPage';
 import AdminHeader from '../../components/Admin/AdminHeader/AdminHeader';
 
+import * as actions from '../../store/actions/index';
+
 class Layout extends Component{
 
     render(){
         return(
             <div>
                 <Route path="/site-admin/login" exact component={AdminLogin}/>
-                {this.props.adminLoggedIn ? <AdminHeader/> : null}
+                {this.props.adminLoggedIn ? 
+                <AdminHeader
+                logout = {() => this.props.onAdminLogout()}
+                /> : null}
                 <Header/>
                     <Search
                     show={this.props.showSearch}
@@ -38,4 +43,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Layout);
+const mapDispatchToProps = dispatch => {
+    return {
+        onAdminLogout: () => dispatch(actions.adminLogout())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

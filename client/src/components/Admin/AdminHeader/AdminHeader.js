@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './AdminHeader.module.css';
 import { useHistory } from 'react-router-dom';
 
-const AdminHeader = () => {
+const AdminHeader = (props) => {
 
     let history = useHistory();
 
@@ -13,7 +13,7 @@ const AdminHeader = () => {
                 onClick = {() => history.push('/site-admin')}
                 >Dashboard</div>
                 <div
-                
+                onClick = {props.logout}
                 >Logout</div>
             </div>
         </div>

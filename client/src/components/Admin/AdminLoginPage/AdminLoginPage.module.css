@@ -5,13 +5,30 @@
     display: flex;
     position: absolute;
     margin: auto;
-    background-color: rgb(200, 200, 200);
+    background-color: rgb(246, 245, 245);
 }
 
 .Form{
-    width: 50%;
+    width: 80%;
     background-color: white;
+    box-shadow: 1px 1px 4px #aba9a9;
     display: block;
     padding: 20px;
     margin: auto;
+}
+
+.Title{
+    text-align: center;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+@media screen and (min-width: 440px) {
+    .Title{
+        font-size: 30px;
+    }
+
+    .Form{
+        width: 50%;
+    }
 }

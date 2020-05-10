@@ -28,7 +28,9 @@ export {
 
 export {
     adminLogin,
-    adminLogout
+    adminLogout,
+    setAdminAuthRedirectPath,
+    adminAuthCheckState
 } from './authAdmin';
 
 export { showSearch } from './UI';

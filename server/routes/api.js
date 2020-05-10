@@ -6,7 +6,7 @@ const _ = require('lodash')
 
 const Product = require('../models/product');
 const {User} = require('../models/user');
-const Customer = require('../models/customer');
+const {Customer} = require('../models/customer');
 const Order = require('../models/order');
 const Image = require('../models/image');
 const Orderdetails = require('../models/order_details')
@@ -137,7 +137,10 @@ router.post('/users/login', (req, res) => {
   
   User.findByCredentials(body.email, body.password).then((user) => {
       return user.generateAuthToken().then((token) => {
-          res.header('x-auth', token).send(user);
+          res.header('x-auth', token).send({
+            user,
+            token
+          });
       })
   }).catch((e) => {
       res.status(401).send({error: 'User not found'});
@@ -198,7 +201,7 @@ router.post('/customers/login', (req, res) => {
           res.header('x-auth', token).send(customer);
       })
   }).catch((e) => {
-      res.status(400).send(e);
+      res.status(401).send(e);
   });
 
 })

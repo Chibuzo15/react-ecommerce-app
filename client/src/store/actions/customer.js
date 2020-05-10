@@ -3,13 +3,14 @@ import axios from '../../axios';
 
 export const login = (userObj) => {
     return dispatch => {
-        axios.post('/api/users/login', userObj)
+        axios.post('/api/customers/login', userObj)
         .then(res => {
             dispatch(loginSuccess(res.data))
             
         })
         .catch((error) => {
-            dispatch(loginFailed()) 
+            console.log(error)
+            dispatch(loginFailed(error)) 
         })
     }
 }
@@ -21,9 +22,10 @@ export const loginSuccess = (userObj) => {
     }
 }
 
-export const loginFailed = () => {
+export const loginFailed = (error) => {
     return {
-        type: actionTypes.LOGIN_FAILED
+        type: actionTypes.LOGIN_FAILED,
+        error: error
     }
 }
 

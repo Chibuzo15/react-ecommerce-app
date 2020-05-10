@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actions';
 const initialState = {
     loggedIn: false,
     user: null,
+    error: null
 }
 
 const customerReducer = (state = initialState, action) => {
@@ -12,6 +13,12 @@ const customerReducer = (state = initialState, action) => {
                 ...state,
                 loggedIn: true,
                 user: action.userObj
+            }
+        case actionTypes.LOGIN_FAILED:
+            return {
+                ...state,
+                loggedIn: false,
+                error: action.error
             }
         case actionTypes.LOGOUT:
             return {
