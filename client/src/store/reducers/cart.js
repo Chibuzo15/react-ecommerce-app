@@ -1,7 +1,9 @@
 import * as actionTypes from '../actions/actions';
 
 const initialState = {
-    cartItems: [],
+    cartData: null,
+    error: null,
+    cartItems: []
 }
 
 function removeCartItem(array, action) {
@@ -10,10 +12,27 @@ function removeCartItem(array, action) {
 
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_TO_CART:
+        case actionTypes.SET_CART_SUCCESS:
             return {
                 ...state,
+                error: null,
+                cartData: action.cartData
+            }
+        case actionTypes.SET_CART_FAILED:
+            return {
+                ...state,
+                error: action.error
+            }
+        case actionTypes.ADD_TO_CART_SUCCESS:
+            return {
+                ...state,
+                error: null,
                 cartItems: [...state.cartItems, action.product_id]
+            }
+        case actionTypes.ADD_TO_CART_FAILURE:
+            return {
+                ...state,
+                error: action.error
             }
         case actionTypes.REMOVE_FROM_CART:
             return {

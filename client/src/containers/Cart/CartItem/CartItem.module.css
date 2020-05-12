@@ -7,6 +7,26 @@
     box-sizing: border-box;
 }
 
+.Details{
+    display: flex;
+}
+
+.Details div{
+    padding: 10px;
+}
+
+.Name{
+    width: 80%
+}
+
+.Price{
+    width: 10%
+}
+
+.Quantity{
+    width: 5%;
+}
+
 .Remove{
     float: right;
 }

@@ -1,17 +1,19 @@
-const express = require ('express');
+const express = require('express');
 const mongoose = require('mongoose');
+// const session = require('express-session')
 const router = express.Router();
 
 const _ = require('lodash')
 
 const Product = require('../models/product');
-const {User} = require('../models/user');
-const {Customer} = require('../models/customer');
+const { Cart } = require('../models/cart');
+const { User } = require('../models/user');
+const { Customer } = require('../models/customer');
 const Order = require('../models/order');
 const Image = require('../models/image');
 const Orderdetails = require('../models/order_details')
 
-const {authenticate, customerAuth} = require('../middleware/authenticate');
+const { authenticate, customerAuth } = require('../middleware/authenticate');
 
 /*
  PRODUCT API
@@ -26,19 +28,19 @@ router.get('/products', (req, res, next) => {
 });
 
 router.get('/products/:id', (req, res, next) => {
-  Product.findOne({"_id": req.params.id})
+  Product.findOne({ "_id": req.params.id })
     .populate('image')
     .then((product) => {
       res.json(product)
     })
     .catch((error) => {
-      res.send({error})
+      res.send({ error })
     })
 });
 
 router.post('/products', (req, res, next) => {
-  if(req.body){
-    
+  if (req.body) {
+
     const image = new Image({
       _id: new mongoose.Types.ObjectId(),
       url: 'http://testurl.com',
@@ -50,18 +52,18 @@ router.post('/products', (req, res, next) => {
       description: req.body.description,
       image: image._id //Get the id from the image
     });
- 
-    product.save()  
+
+    product.save()
       .then(data => {
         res.json(data)
         image.save()
           .then((data) => {
             res.json(data)
-          }) 
-        })
+          })
+      })
       .catch(next)
-      
-  }else {
+
+  } else {
     res.json({
       error: "The input field is empty"
     })
@@ -69,15 +71,15 @@ router.post('/products', (req, res, next) => {
 });
 
 router.patch('/products/:id', (req, res, next) => {
-  if(req.body){
-    Product.findOneAndUpdate({"_id": req.params.id}, req.body , {new : true})
+  if (req.body) {
+    Product.findOneAndUpdate({ "_id": req.params.id }, req.body, { new: true })
       .then((data) => {
         res.json(data)
       })
       .catch((err) => {
         res.json(err)
       })
-  }else {
+  } else {
     res.json({
       error: "The input field is empty"
     })
@@ -85,7 +87,7 @@ router.patch('/products/:id', (req, res, next) => {
 })
 
 router.delete('/products/:id', (req, res, next) => {
-  Product.findOneAndDelete({"_id": req.params.id})
+  Product.findOneAndDelete({ "_id": req.params.id })
     .then(data => res.json(data))
     .catch(next)
 })
@@ -99,8 +101,8 @@ router.post('/users', (req, res, next) => {
   //if name object is present in request body
   var body = _.pick(req.body, ['name', 'email', 'password']);
   var user = new User(body);
-  
-  if(req.body){
+
+  if (req.body) {
     user.save()
       .then(() => {
         return user.generateAuthToken();
@@ -114,7 +116,7 @@ router.post('/users', (req, res, next) => {
     // User.create(req.body)
     //   .then(data => res.json(data))
     //   .catch(next)
-  }else {
+  } else {
     res.json({
       error: "The input field is empty"
     })
@@ -134,25 +136,25 @@ router.get('/users/me', authenticate, (req, res) => {
 router.post('/users/login', (req, res) => {
 
   var body = _.pick(req.body, ['email', 'password']);
-  
+
   User.findByCredentials(body.email, body.password).then((user) => {
-      return user.generateAuthToken().then((token) => {
-          res.header('x-auth', token).send({
-            user,
-            token
-          });
-      })
+    return user.generateAuthToken().then((token) => {
+      res.header('x-auth', token).send({
+        user,
+        token
+      });
+    })
   }).catch((e) => {
-      res.status(401).send({error: 'User not found'});
+    res.status(401).send({ error: 'User not found' });
   });
 
 })
 
 router.delete('/users/me/token', authenticate, (req, res) => {
   req.user.removeToken(req.token).then(() => {
-      res.status(200).send()
+    res.status(200).send()
   }, () => {
-      res.status(400).send()
+    res.status(400).send()
   })
 })
 
@@ -163,7 +165,7 @@ router.delete('/users/me/token', authenticate, (req, res) => {
 router.post('/customers', (req, res, next) => {
   var body = _.pick(req.body, ['first_name', 'last_name', 'state', 'address', 'email', 'password']);
   var customer = new Customer(body)
-  if(req.body){
+  if (req.body) {
     customer.save()
       .then(() => {
         return customer.generateAuthToken();
@@ -175,7 +177,7 @@ router.post('/customers', (req, res, next) => {
         console.log(error)
         res.status(400).send()
       })
-  }else{
+  } else {
     res.json({
       error: 'Input field is empty'
     })
@@ -189,25 +191,25 @@ router.get('/customers/me', customerAuth, (req, res) => {
 router.post('/customers/login', (req, res) => {
 
   var body = _.pick(req.body, ['email', 'password']);
-  
+
   Customer.findByCredentials(body.email, body.password).then((customer) => {
-      return customer.generateAuthToken().then((token) => {
-          res.header('x-auth', token).send({
-            customer,
-            token
-          });
-      })
+    return customer.generateAuthToken().then((token) => {
+      res.header('x-auth', token).send({
+        customer,
+        token
+      });
+    })
   }).catch((e) => {
-      res.status(401).send(e);
+    res.status(401).send(e);
   });
 
 })
 
 router.delete('/customers/me/token', customerAuth, (req, res) => {
   req.customer.removeToken(req.token).then(() => {
-      res.status(200).send()
+    res.status(200).send()
   }, () => {
-      res.status(400).send()
+    res.status(400).send()
   })
 })
 /*
@@ -215,22 +217,43 @@ router.delete('/customers/me/token', customerAuth, (req, res) => {
 
 */
 
-router.post('/orders', (req, res, next) => {
+router.post('/orders', customerAuth, (req, res, next) => {
+  var productDetails = _.pick(req.body, ['products', 'price']);
+  console.log(req.body)
+
   const order = new Order({
-    customer_id : '5eb2d34119a3d42094706b10',// get this from react frontend
-    order_status : 'processing' //get this from react
+    _id: new mongoose.Types.ObjectId(),
+    customer_id: req.customer._id,
+    order_status: req.body.order_status
   })
-  if(req.body){
+
+  const orderDetails = new Orderdetails({
+    product_details: productDetails.products,
+    order_id: order._id,
+    total_price: productDetails.price
+  })
+
+  if (req.body) {
     order.save()
       .then((data) => {
         res.json(data)
+
+        orderDetails.save()
+          .then((data) => {
+            res.send(data)
+          })
+
+          .catch((error) => {
+            res.status(400).send(error)
+          })
       })
+
       .catch((error) => {
-        res.json(error)
+        res.status(400).json(error)
       })
   }
-  else{
-    res.json({
+  else {
+    res.status(400).json({
       error: 'Input field is empty'
     })
   }
@@ -245,6 +268,34 @@ router.get('/orders', (req, res, next) => {
     .catch((error) => {
       res.json(error)
     })
+})
+
+/*
+ CART
+*/
+router.get('/add-to-cart/:id', (req, res) => {
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  Product.findById(productId)
+    .then((product) => {
+      cart.add(product, product._id)
+      req.session.cart = cart;
+      console.log('add to cart called', cart)
+      res.send()
+    }) .catch((err) => { 
+      res.status(500).send(err)
+    })
+    
+})
+
+router.get('/get-cart', (req, res) => {
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  console.log('get cart called', cart)
+  res.send({
+    totalQty: cart.totalQty, 
+    totalPrice: cart.totalPrice, 
+    items: cart.generateArray()})
 })
 
 module.exports = router;

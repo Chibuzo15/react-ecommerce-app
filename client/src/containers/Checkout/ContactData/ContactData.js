@@ -6,6 +6,7 @@ import classes from './ContactData.module.css'
 // import axios from '../../../axios';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
+import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
     state = {
@@ -99,13 +100,15 @@ class ContactData extends Component {
         for (let formElementIdentifier in this.state.orderForm){
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
         }
-        console.log(formData)
+        
             const order = {
-                ingredients: this.props.ings,
-                price: this.props.price,
-                orderData: formData,
+                products: this.props.cartItems,
+                price: 5000,
+                userData: formData,
+                order_status: 'pending'
+                // token: this.props.customerToken
             }
-        // this.props.onOrderBurger(order)        
+        this.props.onOrder(order, this.props.customerToken)        
     }
 
     checkValidity(value, rules){
@@ -153,6 +156,7 @@ class ContactData extends Component {
     }
 
     render(){
+        console.log('Customer token', this.props.customerToken)
         const formElementsArray = [];
         for (let key in this.state.orderForm){
             formElementsArray.push({
@@ -195,16 +199,17 @@ class ContactData extends Component {
     }
 }
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-    
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        onOrder: (orderData, token) => dispatch(actions.order(orderData, token))
+    }
+}
 
-// const mapStateToProps = state => {
-//     return{
-       
-//     }
-// }
+const mapStateToProps = state => {
+    return{
+       cartItems: state.cart.cartItems,
+       customerToken: state.customer.token
+    }
+}
 
-export default connect()(ContactData);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactData);

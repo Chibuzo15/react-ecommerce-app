@@ -1,18 +1,11 @@
-// export {addToCart, 
-//     removeFromCart, 
-//     login,
-//     logout, 
-//     showSearch, 
-//     getProducts,
-//     deleteProduct,
-//     addProduct,
-//     adminLogin,
-//     adminLogout
-// } from './actionCreator';
+export {
+    order
+} from './orders';
 
 export {
-    addToCart, 
-    removeFromCart, 
+    setCart,
+    addToCart,
+    removeFromCart,
 } from './cart';
 
 export {

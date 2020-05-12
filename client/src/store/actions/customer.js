@@ -10,7 +10,7 @@ export const login = (userObj) => {
                 localStorage.setItem('customer_token', res.data.token);
                 localStorage.setItem('customer_expirationDate', expirationDate);
                 localStorage.setItem('customer_userId', res.data.customer._id)
-                dispatch(loginSuccess(res.data))
+                dispatch(loginSuccess(res.data, res.data.token))
 
             })
             .catch((error) => {
@@ -20,10 +20,13 @@ export const login = (userObj) => {
     }
 }
 
-export const loginSuccess = (userObj) => {
+export const loginSuccess = (userObj, token) => {
+    console.log('User obj', userObj)
+    console.log('token', token)
     return {
         type: actionTypes.LOGIN_SUCCESS,
-        userObj
+        userObj: userObj,
+        token: token
     }
 }
 
@@ -68,7 +71,7 @@ export const customerAuthCheckState = () => {
                 dispatch(logout())
             } else {
                 const userId = localStorage.getItem('customer_userId')
-                dispatch(loginSuccess(token, userId))
+                dispatch(loginSuccess(null, token))
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
             }
 

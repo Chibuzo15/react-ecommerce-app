@@ -20,7 +20,7 @@ const singleProduct = (props) => {
                         {props.location.state.price}
                 </span>
                 <Button
-                    handleClick = {() => props.onAddToCart(props.location.state.name)}
+                    handleClick = {() => props.onAddToCart(props.location.state.id)}
                     btnType='Cart'
                 >
                     BUY NOW

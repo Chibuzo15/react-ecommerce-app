@@ -2,8 +2,9 @@ import * as actionTypes from '../actions/actions';
 
 const initialState = {
     loggedIn: false,
-    user: null,
-    error: null
+    userObj: null,
+    error: null,
+    token: null
 }
 
 const customerReducer = (state = initialState, action) => {
@@ -12,17 +13,22 @@ const customerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggedIn: true,
-                user: action.userObj
+                customerId: action.userObj,
+                token: action.token
             }
         case actionTypes.LOGIN_FAILED:
             return {
                 ...state,
+                customerId: null,
+                token: null,
                 loggedIn: false,
                 error: action.error
             }
         case actionTypes.LOGOUT:
             return {
                 ...state,
+                customerId: null,
+                token: null,
                 loggedIn: false
             }
         default:

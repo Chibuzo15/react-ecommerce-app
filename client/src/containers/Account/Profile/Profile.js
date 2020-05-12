@@ -17,7 +17,7 @@ class Profile extends Component{
         return(
             <div>
                 <div className={classes.PageTitle}> My Account </div>
-                <div>Welcome {this.props.userObj.email}</div>
+                <div>Welcome </div>
                 <div className={classes.Wrapper}>
                     <div className={classes.Options}>
                         <div>Orders</div>
@@ -38,7 +38,7 @@ class Profile extends Component{
 const mapStateToProps = state => {
     return {
         loggedIn : state.customer.loggedIn,
-        userObj : state.customer.user
+        // userObj : state.customer.user
     }
 }
 const mapDispatchToProps = {

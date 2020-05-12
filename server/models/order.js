@@ -3,12 +3,15 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const OrderSchema = new Schema({
+  _id: Schema.Types.ObjectId,
   customer_id: { 
     type: Schema.Types.ObjectId,
+    required: true,
     ref: 'Customer' },
   order_date: { type: Date, default: Date.now },
   order_status: { 
     type: String,
+    required: true,
     default : 'pending',
     enum : ['pending', 'processing', 'completed', 'cancelled']  
   }

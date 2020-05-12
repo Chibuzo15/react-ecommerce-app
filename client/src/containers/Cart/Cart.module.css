@@ -5,3 +5,8 @@
     padding: 10px;
     box-sizing: border-box;
 }
+
+.TotalPrice{
+    font-size: 22px;
+    color: rgb(255, 196, 0);
+}
