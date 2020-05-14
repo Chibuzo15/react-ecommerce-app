@@ -24,12 +24,17 @@ const customerReducer = (state = initialState, action) => {
                 loggedIn: false,
                 error: action.error
             }
-        case actionTypes.LOGOUT:
+        case actionTypes.LOGOUT_SUCCESS:
             return {
                 ...state,
                 customerId: null,
                 token: null,
                 loggedIn: false
+            }
+        case actionTypes.LOGOUT_FAILED:
+            return {
+                ...state,
+                error: action.error
             }
         default:
             return state;

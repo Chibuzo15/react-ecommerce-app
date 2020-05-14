@@ -5,7 +5,7 @@ import {clearCart} from './cart';
 
 export const order = (orderData, token) => {
     return dispatch => {
-        console.log(orderData)
+        console.log("orderdata, token", orderData, token)
         const headers = {
             'Content-Type': 'application/json',
             'x-auth': token

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { logout } from '../../../store/actions/index';
+import * as actions from '../../../store/actions/index';
 
 import classes from './Profile.module.css';
 import Button from '../../../components/UI/Button/button';
@@ -26,7 +26,7 @@ class Profile extends Component{
                         <div>Addresses</div>
                         <div>
                             <Button
-                            handleClick={this.props.logout}
+                            handleClick={() => this.props.onLogout(this.props.token)}
                             >Sign out</Button></div>
                     </div>
                     <div className={classes.OptionDetails}></div>
@@ -38,11 +38,14 @@ class Profile extends Component{
 const mapStateToProps = state => {
     return {
         loggedIn : state.customer.loggedIn,
+        token: state.customer.token
         // userObj : state.customer.user
     }
 }
-const mapDispatchToProps = {
-    logout
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogout : (token) => dispatch(actions.logout(token))
+    }
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(Profile);

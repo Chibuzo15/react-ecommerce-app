@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 // const session = require('express-session')
 const router = express.Router();
+const paystack = require('paystack')('sk_test_e3920dc537d3187f8696a77641f39fa873fb3da4');
 
 const _ = require('lodash')
 
@@ -205,13 +206,15 @@ router.post('/customers/login', (req, res) => {
 
 })
 
-router.delete('/customers/me/token', customerAuth, (req, res) => {
+router.delete('/customers/logout', customerAuth, (req, res) => {
+  console.log('logout router')
   req.customer.removeToken(req.token).then(() => {
     res.status(200).send()
   }, () => {
     res.status(400).send()
   })
 })
+
 /*
  ORDER API
 
@@ -259,7 +262,18 @@ router.post('/orders', customerAuth, (req, res, next) => {
   }
 })
 
-router.get('/orders', (req, res, next) => {
+router.get('/orders', authenticate, (req, res, next) => {
+  Order.find({})
+    .populate('customer_id')
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((error) => {
+      res.json(error)
+    })
+})
+
+router.get('/customer/orders', customerAuth, (req, res, next) => {
   Order.find({})
     .populate('customer_id')
     .then((data) => {
@@ -301,6 +315,37 @@ router.get('/get-cart', (req, res) => {
 router.get('/clear-cart', (req, res) => {
   req.session.cart = null;
   res.send()
+})
+
+//paystack testing
+
+router.get('/paystack', (req, res) => {
+  // paystack.plan.get('PLN_v7to6rshcbvvgg4')
+  //   .then(function(error, body) {
+  //       console.log(error);
+  //       console.log(body);
+  //       res.send(error)
+  //   });
+
+  // paystack.plan.create({
+  //   name: 'API demo',
+  //   amount: 10000,
+  //   interval: 'monthly'
+  // })
+  //   .then(function(error, body) {
+  //      console.log(error);
+  //     console.log(body);
+  //     res.send();
+  //     }); 
+  paystack.transaction.list({perPage: 20})
+    .then(body => {
+      console.log(body);
+      res.send(body)
+    })
+    .catch(function(error) {
+        console.log(error);
+        res.send()
+    });
 })
 
 module.exports = router;
