@@ -8,6 +8,10 @@ const OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Customer' },
+  payment_id: {
+    type: String,
+    required: true
+  },
   order_date: { type: Date, default: Date.now },
   order_status: { 
     type: String,

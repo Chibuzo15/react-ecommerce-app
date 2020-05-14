@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actions';
 
 const initialState = {
     cartData: null,
+    totalPrice: null,
     error: null,
     cartItems: []
 }
@@ -16,11 +17,13 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
+                totalPrice: action.cartData.totalPrice,
                 cartData: action.cartData
             }
         case actionTypes.SET_CART_FAILED:
             return {
                 ...state,
+                totalPrice: null,
                 error: action.error
             }
         case actionTypes.ADD_TO_CART_SUCCESS:
@@ -38,6 +41,16 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartItems: removeCartItem(state.cartItems, action.product_id)
+            }
+        case actionTypes.CLEAR_CART_SUCCESS:
+            return {
+                ...state,
+                cartData: null
+            }
+        case actionTypes.CLEAR_CART_FAILED:
+            return {
+                ...state,
+                error: action.error
             }
         default:
             return state;

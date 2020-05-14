@@ -100,13 +100,19 @@ class ContactData extends Component {
         for (let formElementIdentifier in this.state.orderForm){
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
         }
+
+            let products = this.props.cartData.cartItems.map(product => {
+                return {
+                    id: product.id,
+                    quantity: product.quantity
+                }
+            })
         
             const order = {
-                products: this.props.cartItems,
-                price: 5000,
+                products: products,
+                price: this.props.totalPrice,
                 userData: formData,
                 order_status: 'pending'
-                // token: this.props.customerToken
             }
         this.props.onOrder(order, this.props.customerToken)        
     }
@@ -207,7 +213,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return{
-       cartItems: state.cart.cartItems,
+       cartData: state.cart.cartData,
+       totalPrice: state.cart.totalPrice,
        customerToken: state.customer.token
     }
 }

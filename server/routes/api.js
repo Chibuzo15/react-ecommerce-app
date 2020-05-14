@@ -281,7 +281,7 @@ router.get('/add-to-cart/:id', (req, res) => {
     .then((product) => {
       cart.add(product, product._id)
       req.session.cart = cart;
-      console.log('add to cart called', cart)
+      
       res.send()
     }) .catch((err) => { 
       res.status(500).send(err)
@@ -291,11 +291,16 @@ router.get('/add-to-cart/:id', (req, res) => {
 
 router.get('/get-cart', (req, res) => {
   var cart = new Cart(req.session.cart ? req.session.cart : {});
-  console.log('get cart called', cart)
+  
   res.send({
     totalQty: cart.totalQty, 
     totalPrice: cart.totalPrice, 
     items: cart.generateArray()})
+})
+
+router.get('/clear-cart', (req, res) => {
+  req.session.cart = null;
+  res.send()
 })
 
 module.exports = router;

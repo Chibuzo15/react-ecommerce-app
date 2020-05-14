@@ -5,7 +5,7 @@ export {
 export {
     setCart,
     addToCart,
-    removeFromCart,
+    removeFromCart
 } from './cart';
 
 export {

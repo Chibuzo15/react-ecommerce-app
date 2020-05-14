@@ -8,7 +8,7 @@ export const setCart = () => {
             withCredentials: true,
         })
             .then((res) => {
-                let cartItems = res.data.items.map(item => {
+                let cartItems = res.data.items.map(item => { 
                     return {
                         id: item.item._id,
                         name: item.item.name,
@@ -73,4 +73,28 @@ export const addToCartFailed = (error) => {
 
 export function removeFromCart(id) {
     return { type: actionTypes.REMOVE_FROM_CART, product_id: id }
+}
+
+export const clearCart = () => {
+    return dispatch => {
+        axios.get('/api/clear-cart', { withCredentials: true })
+            .then(() => {
+                dispatch(clearCartSuccess())
+            }) .catch((error) => {
+                dispatch(clearCartFailed(error))
+            })
+    }
+}
+
+export const clearCartSuccess = () => {
+    return { 
+        type: actionTypes.CLEAR_CART_SUCCESS,
+    }
+}
+
+export const clearCartFailed = (error) => {
+    return {
+        type: actionTypes.CLEAR_CART_FAILED,
+        error: error
+    }
 }

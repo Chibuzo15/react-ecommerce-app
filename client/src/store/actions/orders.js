@@ -1,6 +1,8 @@
 import * as actionTypes from './actions';
 import axios from '../../axios';
 
+import {clearCart} from './cart';
+
 export const order = (orderData, token) => {
     return dispatch => {
         console.log(orderData)
@@ -14,6 +16,7 @@ export const order = (orderData, token) => {
                 // console.log('This is the response', res)
                 
                 dispatch(orderSuccess())
+                dispatch(clearCart())
             })
             .catch((error) => {
                 dispatch(orderFailed(error)) })

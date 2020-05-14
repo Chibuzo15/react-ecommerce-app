@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 const OrderSummary = (props) => {
     let buildCart = null;
-    if(props.cartItems){
-        buildCart = props.cartItems.map(item => {
+
+    if(props.cartData && props.cartData.totalQty > 0){
+        buildCart = props.cartData.cartItems.map(item => {
             return <div
-            key = {item}
-            >{item}</div>
+            key = {item.id}
+            >{item.name}</div>
         })
     }
 
@@ -20,7 +21,7 @@ const OrderSummary = (props) => {
 
 const mapStateToProps = state => {
     return{
-        cartItems : state.cart.cartItems
+        cartData : state.cart.cartData
     }
 }
 
