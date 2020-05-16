@@ -9,3 +9,7 @@ if(env === 'development' || env === 'test'){
     });
 }
 
+if(env === 'production'){
+    process.env.JWT_SECRET = "isocjcoje093cewr25543fsdvds3"
+}
+
