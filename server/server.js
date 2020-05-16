@@ -8,8 +8,6 @@ const cors = require('cors')
 // require('dotenv').config();
 require('./config/config')
 
-const { createProxyMiddleware } = require('http-proxy-middleware')
-
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -50,8 +48,6 @@ app.use((err, req, res, next) => {
 });
 
 app.use('/api', routes);
-
-app.use('/api', createProxyMiddleware({ target: 'http://localhost:5000' }));
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client', 'build')));
