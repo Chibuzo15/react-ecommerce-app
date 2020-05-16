@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server\\server.js",
     "start-watch": "nodemon server\\server.js",
-    "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\""
+    "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "engines": {
     "node": "10.15.3"
