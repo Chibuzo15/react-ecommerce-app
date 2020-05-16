@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "start": "node server\\server.js",
+    "start": "cd server && node server.js",
     "start-watch": "nodemon server\\server.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
