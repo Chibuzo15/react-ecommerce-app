@@ -275,7 +275,6 @@ router.get('/orders', authenticate, (req, res, next) => {
 
 router.get('/customer/orders', customerAuth, (req, res, next) => {
   Order.find({})
-    .populate('customer_id')
     .then((data) => {
       res.json(data)
     })
