@@ -53,7 +53,7 @@ if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+    res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'))
   });
   
 }
@@ -61,4 +61,5 @@ if(process.env.NODE_ENV === 'production') {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
   console.log(`App environment is ${process.env.NODE_ENV}`)
+  console.log('PATH :',path.join(__dirname, '../client', 'build', 'index.html'))
 });
