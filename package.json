@@ -8,6 +8,9 @@
     "start-watch": "nodemon server\\server.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\""
   },
+  "engines": {
+    "node": "10.15.3"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
