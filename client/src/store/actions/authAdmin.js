@@ -55,7 +55,6 @@ export const setAdminAuthRedirectPath = (path) => {
 }
 
 export const adminAuthCheckState = () => {
-  console.log('auth check state called')
   return dispatch => {
     const token = localStorage.getItem('admin_token');
     if (!token) {

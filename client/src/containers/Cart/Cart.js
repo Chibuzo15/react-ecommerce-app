@@ -48,7 +48,7 @@ class Cart extends Component {
                 {cartItems}
                 <div className={classes.TotalPrice}>{this.props.cartData ? this.props.cartData.totalPrice : null}</div>
                 {
-                    this.props.cartItems.length > 0 ? <Button
+                    this.props.cartData.totalQty > 0 ? <Button
                         btnType='Cart'
                         handleClick={() => this.props.history.push('/checkout')}
                     >
@@ -63,7 +63,6 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cartItems: state.cart.cartItems,
         cartData: state.cart.cartData
     }
 }

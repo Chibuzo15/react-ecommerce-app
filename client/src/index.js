@@ -10,6 +10,7 @@ import authAdminReducer from './store/reducers/authAdmin';
 import cartReducer from './store/reducers/cart';
 import customerReducer from './store/reducers/customer';
 import productReducer from './store/reducers/products';
+import paymentReducer from './store/reducers/payment';
 
 import { BrowserRouter } from 'react-router-dom';
 import {createStore, compose, applyMiddleware, combineReducers} from 'redux'
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   auth: authAdminReducer,
   customer: customerReducer,
-  products: productReducer
+  products: productReducer,
+  payment: paymentReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

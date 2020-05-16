@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import classes from './OrderSummary.module.css'
 
 const OrderSummary = (props) => {
     let buildCart = null;
@@ -8,13 +9,19 @@ const OrderSummary = (props) => {
         buildCart = props.cartData.cartItems.map(item => {
             return <div
             key = {item.id}
-            >{item.name}</div>
+            >{item.name} <span>x{item.quantity}</span></div>
         })
     }
 
     return(
-        <div>
+        <div className={classes.OrderSummary}>
+            <div className={classes.Heading}>
+                PRODUCTS YOU ARE ORDERING
+            </div>
+            <div>
             {buildCart}
+            </div>
+            
         </div>
     )
 }

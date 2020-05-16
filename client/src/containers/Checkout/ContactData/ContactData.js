@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 import Button from '../../../components/UI/Button/button';
 import classes from './ContactData.module.css'
@@ -8,6 +9,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import * as actions from '../../../store/actions/index';
 import PaystackForm from '../../../components/Paystack/PaystackForm';
+import Aux from '../../../hoc/Auxi';
 
 class ContactData extends Component {
     state = {
@@ -104,7 +106,7 @@ class ContactData extends Component {
         }
 
         let products = null;
-        if(this.props.cartData.cartItems){
+        if (this.props.cartData && this.props.cartData.cartItems) {
             products = this.props.cartData.cartItems.map(product => {
                 return {
                     id: product.id,
@@ -112,7 +114,7 @@ class ContactData extends Component {
                 }
             })
         }
-        
+
 
         const order = {
             products: products,
@@ -124,7 +126,7 @@ class ContactData extends Component {
 
         this.setState(prevState => ({
             showPaystack: true
-          }));
+        }));
     }
 
     checkValidity(value, rules) {
@@ -172,7 +174,7 @@ class ContactData extends Component {
     }
 
     render() {
-        
+
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
             formElementsArray.push({
@@ -213,12 +215,19 @@ class ContactData extends Component {
             form = <Spinner />;
         }
 
+        if (this.props.cartData) {
+
+        }
 
         return (
             <div className={classes['ContactData']}>
-                <h4>Enter your Contact Data</h4>
-                {form}
-                {payStack}
+                {this.props.cartData ?
+                    <Aux>
+                        <h4>Enter your Contact Data</h4>
+                        {form}
+                        {payStack}
+                    </Aux>
+                    : <Redirect to = '/cart' /> }
             </div>
         )
     }

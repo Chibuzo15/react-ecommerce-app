@@ -25,3 +25,10 @@
     align-self: flex-end;
     margin-right: 10%
 }
+
+.Success{
+    color: green;
+    font-size: 22px;
+    text-align: center;
+    min-height: 100px;
+}

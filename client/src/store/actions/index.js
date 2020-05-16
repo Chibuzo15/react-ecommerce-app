@@ -28,3 +28,8 @@ export {
 } from './authAdmin';
 
 export { showSearch } from './UI';
+
+export {
+    paymentSuccess,
+    paymentFailed
+} from './payment';

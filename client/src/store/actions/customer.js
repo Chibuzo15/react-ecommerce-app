@@ -83,7 +83,6 @@ export const setCustomerAuthRedirectPath = (path) => {
 }
 
 export const customerAuthCheckState = () => {
-    console.log('auth check state called')
     return dispatch => {
         const token = localStorage.getItem('customer_token');
         if (!token) {

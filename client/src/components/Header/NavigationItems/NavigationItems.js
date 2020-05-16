@@ -8,6 +8,8 @@ import classes from './NavigationItems.module.css';
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { connect } from 'react-redux';
+
 const NavigationItems = (props) => {
 
     // ...
@@ -46,16 +48,30 @@ const NavigationItems = (props) => {
 
     if (props.showMobile){
         //Add account icon to menu
-        NavigationItems.push(
-            <NavLink 
-            //only set Onclick to click prop if show mobile is true
-            onClick={props.showMobile ? props.clicked : null}
-            to='/login'
-            key='icons' 
-            className={classes['Accountbarmobile']}>
-                <span>< FontAwesomeIcon className={classes['Icon']} icon={faUser} />SIGN IN</span>
-            </NavLink>
-        )
+        if(!props.loggedIn){
+            NavigationItems.push(
+                <NavLink 
+                //only set Onclick to click prop if show mobile is true
+                onClick={props.showMobile ? props.clicked : null}
+                to='/login'
+                key='icons' 
+                className={classes['Accountbarmobile']}>
+                    <span>< FontAwesomeIcon className={classes['Icon']} icon={faUser} />SIGN IN</span>
+                </NavLink>
+            )
+        }else{
+            NavigationItems.push(
+                <NavLink 
+                //only set Onclick to click prop if show mobile is true
+                onClick={props.showMobile ? props.clicked : null}
+                to='/my-account'
+                key='icons' 
+                className={classes['Accountbarmobile']}>
+                    <span>< FontAwesomeIcon className={classes['Icon']} icon={faUser} />MY ACCOUNT</span>
+                </NavLink>
+            )
+        }
+        
     }
 
 
@@ -73,4 +89,10 @@ const NavigationItems = (props) => {
     )
 }
 
-export default NavigationItems
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.customer.loggedIn
+    }
+}
+
+export default connect(mapStateToProps)(NavigationItems);

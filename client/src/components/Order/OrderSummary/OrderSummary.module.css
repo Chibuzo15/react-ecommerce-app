@@ -1,0 +1,22 @@
+.OrderSummary{
+    margin:20px auto;
+    width:80%;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.Heading{
+    font-weight: bold;
+}
+
+.Content{
+    text-align: center;
+}
+
+@media (min-width: 600px){
+    .OrderSummary{
+        width: 800px;
+    }
+}

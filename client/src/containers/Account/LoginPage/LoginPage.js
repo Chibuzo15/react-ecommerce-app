@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import Button from '../../../components/UI/Button/button';
 import Input from '../../../components/UI/Input/Input';
@@ -97,18 +97,7 @@ class LoginPage extends Component {
         this.props.login(userObj)
     }
 
-    // handlePassChange = (event) => {
-    //     this.setState({password: event.target.value})
-    // }
-
-    // handleEmailChange = (event) => {
-    //     this.setState({email : event.target.value})
-    // }
-
     render() {
-        if (this.props.loggedIn) {
-            return <Redirect to="/" />;
-        }
 
         const formElementsArray = [];
         for (let key in this.state.controls) {
@@ -131,43 +120,36 @@ class LoginPage extends Component {
             />
         })
 
-        return (
-            <div className={classes.PageWrapper}>
-                {/* <input 
-                onChange={this.handleEmailChange}
-                value={this.state.email}
-                className={classes.Input}
-                type='email' 
-                name='email'
-                placeholder='Email address'
-                />
-                <input 
-                onChange={this.handlePassChange}
-                value={this.state.password}
-                className={classes.Input}
-                type='password' 
-                name='password'
-                placeholder='password'
-                /> */}
-                {form}
-                <div className={classes.Forgot}>
-                    <NavLink to='' > Forgot password </NavLink>
-                </div>
-                <Button
-                    handleClick={this.handleLogin}
-                    btnType='Cart'
-                >
-                    SIGN IN
-                </Button>
-                <div
-                    className={classes.CreateNew}>
-                    <NavLink
-                        to='/signup'
-                    >
-                        Create new account?
-                    </NavLink>
-                </div>
+        let pageContent = <div className={classes.PageWrapper}>
+            {form}
+            <div className={classes.Forgot}>
+                <NavLink to='' > Forgot password </NavLink>
             </div>
+            <Button
+                handleClick={this.handleLogin}
+                btnType='Cart'
+            >
+                SIGN IN
+        </Button>
+            <div
+                className={classes.CreateNew}>
+                <NavLink
+                    to='/signup'
+                >
+                    Create new account?
+            </NavLink>
+            </div>
+        </div>;
+
+        if (this.props.loggedIn) {
+            pageContent = <div className={classes.Success}>You are successfully logged In</div>
+            setTimeout(() => {
+                this.props.history.push('/');
+            }, 3000);
+        }
+
+        return (
+            pageContent
         )
     }
 }
@@ -184,4 +166,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));
