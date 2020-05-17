@@ -32,8 +32,10 @@ let store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ));
 
-if(process.env.baseURL){
-  console.log('Base URL present, bypassing redux tools');
+const public_url = window.location.origin.toString();
+
+if( !public_url.includes("localhost")){
+  console.log('Not on localhost, bypassing redux tools');
   store = createStore(rootReducer, 
     applyMiddleware(thunk)
   );
