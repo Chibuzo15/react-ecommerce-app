@@ -27,7 +27,7 @@ let config = {
 
 if (process.env.baseURL){
   config = {
-    origin: 'https://protected-springs-06155.herokuapp.com',
+    origin: 'https://cors-anywhere.herokuapp.com/https://protected-springs-06155.herokuapp.com',
     credentials: true,
   };
 }
