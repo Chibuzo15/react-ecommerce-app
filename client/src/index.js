@@ -28,9 +28,16 @@ const rootReducer = combineReducers({
   payment: paymentReducer
 });
 
-const store = createStore(rootReducer, composeEnhancers(
+let store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ));
+
+if(process.env.baseURL){
+  console.log('Base URL present, bypassing redux tools');
+  store = createStore(rootReducer, 
+    applyMiddleware(thunk)
+  );
+}
 
 ReactDOM.render(
   <Provider store={store}>

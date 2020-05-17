@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 
 //connect to the database
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
-  .then(() => console.log(`Database connected successfully on Url ${process.env.MONGODB_URI}`))
+  .then(() => console.log(`Database connected successfully`))
   .catch(err => console.log(err));
 
 //since mongoose promise is depreciated, we overide it with node's promise
@@ -60,6 +60,4 @@ if(process.env.NODE_ENV === 'production') {
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
-  console.log(`App environment is ${process.env.NODE_ENV}`)
-  console.log('PATH :',path.join(__dirname, '../client', 'build', 'index.html'))
 });
