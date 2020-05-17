@@ -20,10 +20,17 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
 //since mongoose promise is depreciated, we overide it with node's promise
 mongoose.Promise = global.Promise;
 
-const config = {
+let config = {
   origin: 'http://localhost:3000',
   credentials: true,
 };
+
+if (process.env.baseURL){
+  config = {
+    origin: 'https://protected-springs-06155.herokuapp.com/',
+    credentials: true,
+  };
+}
 
 app.use(cors(config));
 
