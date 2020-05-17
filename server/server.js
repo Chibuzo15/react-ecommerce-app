@@ -27,7 +27,7 @@ let config = {
 
 if (process.env.baseURL){
   config = {
-    origin: 'https://protected-springs-06155.herokuapp.com/',
+    origin: 'https://protected-springs-06155.herokuapp.com',
     credentials: true,
   };
 }
