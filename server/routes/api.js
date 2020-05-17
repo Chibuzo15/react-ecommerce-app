@@ -302,6 +302,22 @@ router.get('/add-to-cart/:id', (req, res) => {
     
 })
 
+router.get('/remove-from-cart/:id', (req, res) => {
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  Product.findById(productId)
+    .then((product) => {
+      cart.remove(product._id)
+      req.session.cart = cart;
+      
+      res.send(cart)
+    }) .catch((err) => { 
+      res.status(500).send(err)
+    })
+    
+})
+
 router.get('/get-cart', (req, res) => {
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   
@@ -316,9 +332,10 @@ router.get('/clear-cart', (req, res) => {
   res.send()
 })
 
+
 //paystack testing
 
-router.get('/paystack', (req, res) => {
+// router.get('/paystack', (req, res) => {
   // paystack.plan.get('PLN_v7to6rshcbvvgg4')
   //   .then(function(error, body) {
   //       console.log(error);
@@ -335,16 +352,16 @@ router.get('/paystack', (req, res) => {
   //      console.log(error);
   //     console.log(body);
   //     res.send();
-  //     }); 
-  paystack.transaction.list({perPage: 20})
-    .then(body => {
-      console.log(body);
-      res.send(body)
-    })
-    .catch(function(error) {
-        console.log(error);
-        res.send()
-    });
-})
+//   //     }); 
+//   paystack.transaction.list({perPage: 20})
+//     .then(body => {
+//       console.log(body);
+//       res.send(body)
+//     })
+//     .catch(function(error) {
+//         console.log(error);
+//         res.send()
+//     });
+// })
 
 module.exports = router;

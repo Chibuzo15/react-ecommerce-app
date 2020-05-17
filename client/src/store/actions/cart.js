@@ -1,6 +1,5 @@
 import * as actionTypes from './actions';
 import axios from '../../axios';
-import cartItem from '../../containers/Cart/CartItem/CartItem';
 
 export const setCart = () => {
     return dispatch => {
@@ -47,12 +46,10 @@ export const setCartFailed = (error) => {
 
 export function addToCart(id) {
     return dispatch => {
-        console.log(id)
         axios.get(`/api/add-to-cart/${id}`, { withCredentials: true })
             .then((res) => {
                 dispatch(addToCartSuccess(id))
             }).catch((error) => {
-                console.log(error)
                 dispatch(addToCartFailed(error))
             })
     }
@@ -72,8 +69,32 @@ export const addToCartFailed = (error) => {
 }
 
 export function removeFromCart(id) {
-    return { type: actionTypes.REMOVE_FROM_CART, product_id: id }
+    return dispatch => {
+        axios.get(`/api/remove-from-cart/${id}`, {
+            withCredentials: true,
+        })
+            .then((res) => {
+                console.log(res.data)
+                dispatch(removeFromCartSuccess(res.data))
+                dispatch(setCart())
+            }) .catch((error) => {
+                dispatch(removeFromCartFailure(error))
+            })
+    }
 }
+
+export const removeFromCartSuccess = (cartData) => {
+    return {
+        type: actionTypes.REMOVE_FROM_CART_SUCCESS, cartData: cartData
+    }
+}
+
+export const removeFromCartFailure = (error) => {
+    return {
+        type: actionTypes.REMOVE_FROM_CART_FAILURE,
+        error: error
+    }
+} 
 
 export const clearCart = () => {
     return dispatch => {

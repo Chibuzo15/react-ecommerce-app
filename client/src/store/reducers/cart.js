@@ -30,17 +30,23 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
-                cartItems: [...state.cartItems, action.product_id]
+                // cartItems: [...state.cartItems, action.product_id]
             }
         case actionTypes.ADD_TO_CART_FAILURE:
             return {
                 ...state,
                 error: action.error
             }
-        case actionTypes.REMOVE_FROM_CART:
+        case actionTypes.REMOVE_FROM_CART_SUCCESS:
             return {
                 ...state,
-                cartItems: removeCartItem(state.cartItems, action.product_id)
+                cartData: action.cartData
+                // cartItems: removeCartItem(state.cartItems, action.product_id)
+            }
+        case actionTypes.REMOVE_FROM_CART_FAILURE:
+            return {
+                ...state,
+                error: action.error
             }
         case actionTypes.CLEAR_CART_SUCCESS:
             return {

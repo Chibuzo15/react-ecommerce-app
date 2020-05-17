@@ -4,8 +4,10 @@ function Cart(oldCart) {
     this.totalPrice = oldCart.totalPrice || 0;
 
     this.add = function (item, id) {
+        //check if product is already in cart, if so retrieve rest of details and store in variable
         var storedItem = this.items[id];
-        
+
+        //if its not previously present
         if (!storedItem) {
             storedItem = this.items[id] = { item: item, qty: 0, price: 0 }
         }
@@ -14,6 +16,20 @@ function Cart(oldCart) {
         this.totalQty++;
         this.totalPrice += storedItem.item.price;
     };
+
+    this.remove = function (id) {
+        if (this.items[id]) {
+            let newCart = Object.assign({}, this.items);
+            
+            this.totalPrice -= this.items[id].price
+            this.totalQty -= this.items[id].qty;
+
+            delete newCart[id];
+
+            this.items = newCart
+        }
+
+    }
 
     this.generateArray = function () {
         var arr = [];

@@ -29,17 +29,17 @@ class Cart extends Component {
             }]
         const topBarRender = topBar.map(each => {
             let width = `${each.width}` + "%";
-            return <div style={{ width: width }}>{each.name}</div>
+            return <div key={each.name} style={{ width: width }}>{each.name}</div>
         })
 
         let buildCart = <div className={classes.EmptyText}>Cart is currently empty</div>;
 
         let cartItems = null;
-        if (this.props.cartData && this.props.cartData.totalQty > 0) {
+        if (this.props.cartData && this.props.cartData.totalQty > 0 && this.props.cartData.cartItems) {
             cartItems = this.props.cartData.cartItems.map(item => {
                 return <CartItem
-                    key={item.date}
-                    remove={() => this.props.removeFromCart(item._id)}
+                    key={item.id}
+                    remove={() => this.props.removeFromCart(item.id)}
                 >{item}</CartItem>
             })
 
