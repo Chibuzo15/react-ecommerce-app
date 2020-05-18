@@ -220,7 +220,7 @@ router.delete('/customers/logout', customerAuth, (req, res) => {
 
 */
 
-router.post('/orders', customerAuth, (req, res, next) => {
+router.post('/add-order', customerAuth, (req, res, next) => {
   var productDetails = _.pick(req.body, ['products', 'price']);
   console.log(req.body)
 

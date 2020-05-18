@@ -1,5 +1,7 @@
 export {
-    order
+    order,
+    getOrdersAdmin,
+    getOrdersCustomer
 } from './orders';
 
 export {

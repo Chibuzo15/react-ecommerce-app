@@ -1,0 +1,16 @@
+import React from 'react';
+import classes from './EachOrder.module.css'
+
+const Order = (props) => {
+    console.log(props.order)
+    return (
+        <tr className={classes.Order}>
+            <td>{props.num}</td>
+            <td>{props.order.customer_id.email}</td>
+            <td>{props.order.order_status}</td>
+            <td>{props.order.order_date}</td>
+        </tr>
+    )
+}
+
+export default Order;

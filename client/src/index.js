@@ -11,6 +11,7 @@ import cartReducer from './store/reducers/cart';
 import customerReducer from './store/reducers/customer';
 import productReducer from './store/reducers/products';
 import paymentReducer from './store/reducers/payment';
+import orderReducer from './store/reducers/orders';
 
 import { BrowserRouter } from 'react-router-dom';
 import {createStore, compose, applyMiddleware, combineReducers} from 'redux'
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   auth: authAdminReducer,
   customer: customerReducer,
   products: productReducer,
-  payment: paymentReducer
+  payment: paymentReducer,
+  order: orderReducer
 });
 
 let store = createStore(rootReducer, composeEnhancers(
