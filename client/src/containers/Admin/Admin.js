@@ -5,6 +5,7 @@ import SideBarItem from '../../components/Admin/SideBarItem/SideBarItem';
 import Dashboard from '../../components/Admin/Dashboard/Dashboard';
 import ProductsAdmin from '../../components/Admin/Products/ProductsAdmin';
 // import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Admin extends Component {
     state = {
@@ -23,7 +24,9 @@ class Admin extends Component {
     renderClicked = () => {
         switch (this.state.content){
             case('dashboard'):
-                return <Dashboard/>
+                return <Dashboard
+                adminLoggedIn = {this.props.adminLoggedIn}
+                />
             case('products'):
                 return <ProductsAdmin/>
             default:
@@ -51,4 +54,10 @@ class Admin extends Component {
     }
 }
 
-export default Admin;
+const mapStateToProps = state => {
+    return {
+        adminLoggedIn: state.auth.adminLoggedIn
+    }
+}
+
+export default connect(mapStateToProps)(Admin);

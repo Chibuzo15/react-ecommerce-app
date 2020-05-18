@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-.ProductsAdmin div{
+.ProductsAdmin .Option{
     background-color: rgba(240, 240, 240, 0.644);
     border: 1px solid grey;
     height: 60px;

@@ -21,7 +21,7 @@ class Products extends Component {
 
     render() {
         let products = this.props.products ? this.props.products : null;
-        console.log(products);
+        
         let renderProducts = null;
         if (products){
             renderProducts = products.map(product => {

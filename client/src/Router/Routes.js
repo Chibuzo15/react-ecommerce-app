@@ -28,12 +28,13 @@ const Routes = (props) => {
             <Route path='/cart' exact component={Cart} />
             <Route path='/checkout' exact component={Checkout} />
             <Route path='/site-admin' exact component={Admin} />
+            <Route path="/site-admin">
+                    {props.adminLoggedIn ? null : <Redirect to="/site-admin/login" />}
+            </Route>
             <Switch>
                 <Route path='/site-admin/products' exact component={AdminProducts}/>
                 <Route path='/site-admin/products/new' exact component={AddNewProduct}/>
-                {/* <Route path="/site-admin">
-                    {props.adminLoggedIn ? <Redirect to="/dashboard" /> : <AdminLogin />}
-                </Route> */}
+                {/*  */}
             </Switch>
             
         </Aux>

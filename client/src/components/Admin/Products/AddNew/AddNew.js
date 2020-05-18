@@ -150,7 +150,6 @@ class AddNew extends Component {
         if (this.props.loading){
             form = <Spinner/>;
         }
-        console.log(this.props.history)
 
         return (
             <div>
