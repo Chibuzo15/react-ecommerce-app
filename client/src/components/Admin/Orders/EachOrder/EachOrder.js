@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './EachOrder.module.css'
 
 const Order = (props) => {
-    console.log(props.order)
     return (
         <tr className={classes.Order}>
             <td>{props.num}</td>
