@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import Button from '../../../components/UI/Button/button';
 import Input from '../../../components/UI/Input/Input';
@@ -120,7 +120,12 @@ class LoginPage extends Component {
             />
         })
 
+        const message = <div className={classes.Message}>
+            {this.props.location.state ? this.props.location.state.message : null}
+        </div>
+
         let pageContent = <div className={classes.PageWrapper}>
+            {message}
             {form}
             <div className={classes.Forgot}>
                 <NavLink to='' > Forgot password </NavLink>
@@ -143,9 +148,15 @@ class LoginPage extends Component {
 
         if (this.props.loggedIn) {
             pageContent = <div className={classes.Success}>You are successfully logged In</div>
+            const RedirectUrl = this.props.location.state ? this.props.location.state.redirect : '/';
+
+            if(!this.props.location.state.message){
             setTimeout(() => {
-                this.props.history.push('/');
+                return <Redirect to={RedirectUrl} />
+                // this.props.history.push('/');
             }, 3000);
+           }
+           return <Redirect to={RedirectUrl} />
         }
 
         return (

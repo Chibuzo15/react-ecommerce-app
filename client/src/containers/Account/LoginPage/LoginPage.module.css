@@ -32,3 +32,11 @@
     text-align: center;
     min-height: 100px;
 }
+
+.Message{
+    color: red;
+    font-size: 22px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}

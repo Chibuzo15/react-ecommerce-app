@@ -227,7 +227,13 @@ class ContactData extends Component {
                         {form}
                         {payStack}
                     </Aux>
-                    : <Redirect to = '/cart' /> }
+                    : <Redirect to={{
+                        pathname: '/login',
+                        state: {
+                            message: 'You must be logged In before checkout',
+                            redirect: '/checkout'
+                        }
+                    }} />}
             </div>
         )
     }

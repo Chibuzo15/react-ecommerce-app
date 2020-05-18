@@ -332,36 +332,4 @@ router.get('/clear-cart', (req, res) => {
   res.send()
 })
 
-
-//paystack testing
-
-// router.get('/paystack', (req, res) => {
-  // paystack.plan.get('PLN_v7to6rshcbvvgg4')
-  //   .then(function(error, body) {
-  //       console.log(error);
-  //       console.log(body);
-  //       res.send(error)
-  //   });
-
-  // paystack.plan.create({
-  //   name: 'API demo',
-  //   amount: 10000,
-  //   interval: 'monthly'
-  // })
-  //   .then(function(error, body) {
-  //      console.log(error);
-  //     console.log(body);
-  //     res.send();
-//   //     }); 
-//   paystack.transaction.list({perPage: 20})
-//     .then(body => {
-//       console.log(body);
-//       res.send(body)
-//     })
-//     .catch(function(error) {
-//         console.log(error);
-//         res.send()
-//     });
-// })
-
 module.exports = router;

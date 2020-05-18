@@ -5,7 +5,7 @@ import CartItem from './CartItem/CartItem';
 import Button from '../../components/UI/Button/button';
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { removeFromCart, setCart } from '../../store/actions/index';
 import cartItem from './CartItem/CartItem';
 
@@ -13,6 +13,21 @@ class Cart extends Component {
     componentDidMount() {
         this.props.setCart()
     }
+
+    handleCheckoutClick = () => {
+        if (!this.props.loggedIn) {
+            this.props.history.push({
+                pathname: '/login',
+                state: {
+                    message: 'You must be logged In before checkout',
+                    redirect: '/checkout'
+                }
+            })
+            return
+        }
+        this.props.history.push('/checkout')
+    }
+
     render() {
         const topBar = [
             {
@@ -50,7 +65,7 @@ class Cart extends Component {
                 {
                     this.props.cartData.totalQty > 0 ? <Button
                         btnType='Cart'
-                        handleClick={() => this.props.history.push('/checkout')}
+                        handleClick={this.handleCheckoutClick}
                     >
                         PROCEED TO CHECKOUT
             </Button> : null}
@@ -63,7 +78,8 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cartData: state.cart.cartData
+        cartData: state.cart.cartData,
+        loggedIn: state.customer.loggedIn
     }
 }
 
