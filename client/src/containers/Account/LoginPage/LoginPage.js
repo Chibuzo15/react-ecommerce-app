@@ -149,8 +149,10 @@ class LoginPage extends Component {
         if (this.props.loggedIn) {
             pageContent = <div className={classes.Success}>You are successfully logged In</div>
             const RedirectUrl = this.props.location.state ? this.props.location.state.redirect : '/';
-            
+            console.log('On login Page')
+            console.log('url :', RedirectUrl)
             if(!this.props.location.state){
+                console.log('Message and location state unknown')
             setTimeout(() => {
                 return <Redirect to={RedirectUrl} />
             }, 3000);

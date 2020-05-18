@@ -1,0 +1,8 @@
+.Order{
+    height: 40px;
+    text-align: center;
+}
+
+.Order td{
+    padding: 9px
+}

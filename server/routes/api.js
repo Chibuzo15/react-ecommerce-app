@@ -207,7 +207,7 @@ router.post('/customers/login', (req, res) => {
 })
 
 router.delete('/customers/logout', customerAuth, (req, res) => {
-  console.log('logout router')
+  // console.log('logout router')
   req.customer.removeToken(req.token).then(() => {
     res.status(200).send()
   }, () => {
@@ -274,7 +274,9 @@ router.get('/orders', authenticate, (req, res, next) => {
 })
 
 router.get('/customer/orders', customerAuth, (req, res, next) => {
-  Order.find({})
+  Order.find({
+    customer_id: req.customer._id
+})
     .then((data) => {
       res.json(data)
     })

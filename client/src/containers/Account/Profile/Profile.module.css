@@ -1,45 +1,27 @@
-.ProfilePage{
-
-}
-
-.PageTitle{
-    font-size: 22px;
-}
-
-.Wrapper{
+.PageWrap{
     display: flex;
+    width: 100%;
+    box-sizing: border-box;
     flex-wrap: wrap;
 }
 
-.Options{
-    width: 100%;
-    margin: 5px
-}
-
-.Options div{
-    height: 40px;
-    padding: 10px;
-    border: 1px solid blue;
+.SideBar{
+    width:100%;
     box-sizing: border-box;
 }
 
-.OptionDetails{
-    display: none;
+.content{
+    width: 100%;
+    box-sizing: border-box;
 }
 
 @media screen and (min-width: 430px){
-    .Options{
-        width: 30%;
-        border: 1px solid red
+    .SideBar{
+        width:20%;
+        border: 1px solid rgba(133, 133, 133, 0.719)
     }
 
-    .Options div{
-        height: 60px;
-    }
-    
-    .OptionDetails{
-        width:70%;
-        display: block;
-        border: 1px solid red;
+    .content{
+        width: 80%
     }
 }

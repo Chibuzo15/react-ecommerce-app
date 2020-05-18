@@ -221,7 +221,8 @@ class ContactData extends Component {
 
         return (
             <div className={classes['ContactData']}>
-                {this.props.cartData ?
+                {!this.props.cartData ? <Redirect to='/cart' /> : null}
+                {this.props.loggedIn ?
                     <Aux>
                         <h4>Enter your Contact Data</h4>
                         {form}
@@ -249,7 +250,8 @@ const mapStateToProps = state => {
     return {
         cartData: state.cart.cartData,
         totalPrice: state.cart.totalPrice,
-        customerToken: state.customer.token
+        customerToken: state.customer.token,
+        loggedIn: state.customer.loggedIn
     }
 }
 
