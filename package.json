@@ -17,15 +17,20 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concat-stream": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "jimp": "^0.12.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "mkdirp": "^1.0.4",
     "mongoose": "^5.9.11",
+    "multer": "^1.4.2",
     "paystack": "^2.0.1",
     "react-paystack": "^2.0.2",
+    "streamifier": "^0.1.1",
     "validator": "^13.0.0"
   },
   "devDependencies": {
