@@ -24,37 +24,43 @@ require('../config/config');
 
 // setup a new instance of the ProductImageStorage engine
 var storage = ProductImageStorage({
-  square: true,
+  portrait: true,
+  // square: true,
   responsive: true,
-  greyscale: true,
+  // greyscale: true,
   quality: 90
-  });
-  
-  var limits = {
+});
+
+var limits = {
   files: 1, // allow only 1 file per request
   fileSize: 1024 * 1024, // 1 MB (max file size)
-  };
-  
-  var fileFilter = function(req, file, cb) {
+};
+
+var fileFilter = function (req, file, cb) {
   // supported image file mimetypes
   var allowedMimes = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
-  
+
   if (_.includes(allowedMimes, file.mimetype)) {
-  // allow supported image files
-  cb(null, true);
+    // allow supported image files
+    cb(null, true);
   } else {
-  // throw error for invalid files
-  cb(new Error('Invalid file type. Only jpg, png and gif image files are allowed.'));
+    // throw error for invalid files
+    cb(new Error('Invalid file type. Only jpg, png and gif image files are allowed.'));
   }
-  };
-  
-  // setup multer
-  var upload = multer({
+};
+
+// setup multer
+var upload = multer({
   storage: storage,
   limits: limits,
   fileFilter: fileFilter
-  });
-  
+});
+
+
+/**
+ * ROUTES BEGIN 
+ * 
+ */
 
 /*
  PRODUCT API
@@ -316,7 +322,7 @@ router.get('/orders', authenticate, (req, res, next) => {
 router.get('/customer/orders', customerAuth, (req, res, next) => {
   Order.find({
     customer_id: req.customer._id
-})
+  })
     .then((data) => {
       res.json(data)
     })
@@ -336,12 +342,12 @@ router.get('/add-to-cart/:id', (req, res) => {
     .then((product) => {
       cart.add(product, product._id)
       req.session.cart = cart;
-      
+
       res.send()
-    }) .catch((err) => { 
+    }).catch((err) => {
       res.status(500).send(err)
     })
-    
+
 })
 
 router.get('/remove-from-cart/:id', (req, res) => {
@@ -352,21 +358,22 @@ router.get('/remove-from-cart/:id', (req, res) => {
     .then((product) => {
       cart.remove(product._id)
       req.session.cart = cart;
-      
+
       res.send(cart)
-    }) .catch((err) => { 
+    }).catch((err) => {
       res.status(500).send(err)
     })
-    
+
 })
 
 router.get('/get-cart', (req, res) => {
   var cart = new Cart(req.session.cart ? req.session.cart : {});
-  
+
   res.send({
-    totalQty: cart.totalQty, 
-    totalPrice: cart.totalPrice, 
-    items: cart.generateArray()})
+    totalQty: cart.totalQty,
+    totalPrice: cart.totalPrice,
+    items: cart.generateArray()
+  })
 })
 
 router.get('/clear-cart', (req, res) => {
@@ -379,34 +386,37 @@ router.get('/clear-cart', (req, res) => {
 UPLOAD
 */
 
-router.post('/upload-image', upload.single('avatar'), function(req, res, next) {
- 
+router.post('/upload-image', upload.single('avatar'), function (req, res, next) {
   var files;
   var file = req.file.filename;
   var matches = file.match(/^(.+?)_.+?\.(.+)$/i);
-  console.log('Image name', file)
 
-  if (matches) {
-  files = _.map(['lg', 'md', 'sm'], function(size) {
-  return matches[1] + '_' + size + '.' + matches[2];
-  });
-  } else {
-  files = [file];
+  if (req.file) {
+    if (matches) {
+      files = _.map(['lg', 'md', 'sm'], function (size) {
+        return matches[1] + '_' + size + '.' + matches[2];
+      });
+    } else {
+      files = [file];
+    }
+
+    files = _.map(files, function (file) {
+      var port = req.app.get('port');
+      var base = req.protocol + '://' + req.hostname + (port ? ':' + port : '');
+      var url = path.join(req.file.baseUrl, file).replace(/[\\\/]+/g, '/').replace(/^[\/]+/g, '');
+
+      return (req.file.storage == 'local' ? base : '') + '/' + url;
+    });
+
+
+    res.json({
+      images: files
+    });
   }
-  
-  files = _.map(files, function(file) {
-  var port = req.app.get('port');
-  var base = req.protocol + '://' + req.hostname + (port ? ':' + port : '');
-  var url = path.join(req.file.baseUrl, file).replace(/[\\\/]+/g, '/').replace(/^[\/]+/g, '');
-  
-  return (req.file.storage == 'local' ? base : '') + '/' + url;
-  });
-  
-  res.json({
-  images: files
-  });
-  
-  });
-  
+  else {
+    res.status(400).send()
+  }
+});
+
 
 module.exports = router;

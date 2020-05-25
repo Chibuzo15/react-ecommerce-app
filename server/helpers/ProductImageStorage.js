@@ -31,7 +31,8 @@ var ProductImageStorage = function (options) {
             output: 'png',
             greyscale: false, 
             quality: 70,
-            square: true,
+            square: false,
+            portrait: false,
             threshold: 500,
             responsive: false,
         };
@@ -145,7 +146,7 @@ var ProductImageStorage = function (options) {
         // fetch the Jimp image dimensions
         var width = clone.bitmap.width;
         var height = clone.bitmap.height;
-        var square = Math.min(width, height);
+        var square = Math.min(width, height); 
         var threshold = this.options.threshold;
 
         // resolve the Jimp output mime type
@@ -162,6 +163,18 @@ var ProductImageStorage = function (options) {
         // auto scale the image dimensions to fit the threshold requirement
         if (threshold && square > threshold) {
             clone = (square == width) ? clone.resize(threshold, Jimp.AUTO) : clone.resize(Jimp.AUTO, threshold);
+        }
+
+        // crop the image to a portrait if enabled
+        if (this.options.portrait) {
+
+            if (threshold) {
+                square = Math.min(square, threshold);
+            }
+
+            // fetch the new image dimensions and crop
+            clone = clone.crop((clone.bitmap.width - square) / 2, (clone.bitmap.height - square) / 2, square * 0.75, square);
+
         }
 
         // crop the image to a square if enabled
