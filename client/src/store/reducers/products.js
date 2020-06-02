@@ -3,6 +3,8 @@ import * as actionTypes from '../actions/actions';
 const initialState = {
     products: null,
     products_error : false,
+    uploaded_image_url: null,
+    uploaded_image_id: null
 }
 
 const productReducer = (state = initialState, action) => {
@@ -35,6 +37,19 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 admin_error: true,
+            }
+        case actionTypes.UPLOAD_PRODUCT_IMAGE_SUCCESS:
+            return {
+                ...state,
+                uploaded_image_url: action.url,
+                uploaded_image_id: action.image_id
+            }
+        case actionTypes.UPLOAD_PRODUCT_IMAGE_FAILED:
+            return {
+                ...state,
+                uploaded_image_url: null,
+                uploaded_image_id: null,
+                products_error: action.error
             }
         default:
             return state;

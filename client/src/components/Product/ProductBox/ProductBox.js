@@ -11,6 +11,20 @@ import product3 from '../../../assets/images/Products/suit-3.jpg'
 
 const ProductBox = (props) => {
     const history = useHistory()
+
+    //formatting base url for node server , which is used to serve product images
+    const public_url = window.location.origin.toString();
+
+    let baseUrl = "https://protected-springs-06155.herokuapp.com/";
+    if (public_url.includes("localhost")){
+        baseUrl = "http://localhost:5000/";
+    }
+
+    let image_url = null
+    if(props.image){
+        image_url = baseUrl + 'images' + props.image.replace('--', '_md')
+    }
+
     return (
         <div 
         onClick={() => history.push({
@@ -20,7 +34,7 @@ const ProductBox = (props) => {
         className={classes.ProductBox}>
             <img 
             className={classes.ProductImage}
-            src={product3}
+            src={image_url}
             />
             <div className={classes.ProductTitle}>
                 {props.name}

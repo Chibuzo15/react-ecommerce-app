@@ -20,6 +20,7 @@ export {
     getProducts,
     deleteProduct,
     addProduct,
+    uploadProductImage
 } from './products';
 
 export {

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import classes from './ProductsAdmin.module.css';
-import AllProducts from './Products/Products';
-import AddNewProduct from './AddNew/AddNew';
+
+import AdminSideWrapper from '../AdminSideWrapper/AdminSideWrapper';
+
+import { Route, Link } from 'react-router-dom';
 
 
 class ProductsAdmin extends Component {
@@ -16,36 +18,31 @@ class ProductsAdmin extends Component {
         })
     }
 
-    renderItem = () => {
-        switch (this.state.content) {
-            case ('view'):
-                return <AllProducts />
-            case ('new'): 
-                return <AddNewProduct />
-            default:
-                return null
-        }
-    }
-
     render() {
-    let itemToRender = null;
-
-    itemToRender = this.renderItem()
         return (
-            <div className={classes.ProductsAdmin}>
-                
+            <AdminSideWrapper>
+                <div className={classes.ProductsAdmin}>
+
                     <div>
-                        <div
-                            className={classes.Option}
-                            onClick={() => this.changeItem('view')}
-                        >View Products</div>
-                        <div
-                            className={classes.Option}
-                            onClick={() => this.changeItem('new')}
-                        >Add new product</div>
+                        <Link
+                            to='/site-admin/products/all'
+                        >
+                            <div
+                                className={classes.Option}
+                            >View Products</div>
+                        </Link>
+
+                        <Link
+                            to='/site-admin/products/new'
+                        >
+                            <div
+                                className={classes.Option}
+                            >Add new product</div>
+                        </Link>
+
                     </div>
-                    {itemToRender}
-            </div>
+                </div>
+            </AdminSideWrapper>
         )
     }
 }

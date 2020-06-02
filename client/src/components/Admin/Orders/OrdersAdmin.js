@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EachOrder from './EachOrder/EachOrder';
 
+import AdminSideWrapper from '../AdminSideWrapper/AdminSideWrapper';
+
 import * as actions from '../../../store/actions/index';
 
 class Orders extends Component {
@@ -36,10 +38,12 @@ class Orders extends Component {
         }
 
         return (
-            <div>
-                <div>Orders</div>
-                {orders}
-            </div>
+            <AdminSideWrapper>
+                <div>
+                    <div>Orders</div>
+                    {orders}
+                </div>
+            </AdminSideWrapper>
         )
     }
 }

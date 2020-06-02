@@ -54,6 +54,8 @@ app.use((err, req, res, next) => {
   next();
 });
 
+app.use('/images', express.static(path.join(__dirname,'uploads')));
+
 app.use('/api', routes);
 
 if(process.env.NODE_ENV === 'production') {

@@ -6,18 +6,13 @@ import Dashboard from '../../components/Admin/Dashboard/Dashboard';
 import ProductsAdmin from '../../components/Admin/Products/ProductsAdmin';
 import Orders from '../../components/Admin/Orders/OrdersAdmin';
 import Users from '../../components/Admin/Users/Users';
+import AdminSideWrapper from '../../components/Admin/AdminSideWrapper/AdminSideWrapper';
+
 // import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Admin extends Component {
     state = {
-        side_layout: [
-            { name: 'dashboard' },
-            { name: 'products' },
-            { name: 'orders' },
-            { name: 'customers'},
-            { name: 'users' },
-        ],
         content: 'dashboard'
     }
 
@@ -45,20 +40,15 @@ class Admin extends Component {
     }
 
     render() {
-        const renderSideBar = this.state.side_layout.map(item => {
-            return <SideBarItem
-                clickedItem={(item) => this.handleItemClick(item)}
-                key={item.name}>{item.name}</SideBarItem>
-        })
 
         let contentToRender = this.renderClicked()
 
         return (
-            <div className={classes.AdminWrap}>
-
-                <div className={classes.SideBar}>Welcome User <br /> {renderSideBar} </div>
-                <div className={classes.content}> {contentToRender} </div>
-            </div>
+            <AdminSideWrapper>
+                <div className={classes.AdminWrap}>
+                    <div className={classes.content}> {contentToRender} </div>
+                </div>
+            </AdminSideWrapper>
         )
     }
 }

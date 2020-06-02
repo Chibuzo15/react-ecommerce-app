@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+import AdminSideWrapper from '../AdminSideWrapper/AdminSideWrapper'
+
 class Customers extends Component {
     render() {
         return (
-            <div>Customers</div>
+            <AdminSideWrapper>
+                <div>Customers</div>
+            </AdminSideWrapper>
         )
     }
 }

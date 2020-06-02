@@ -1,13 +1,18 @@
 import React from 'react';
 import classes from './SideBarItem.module.css';
 
+import { Link } from 'react-router-dom'
+
 const sideBarItem = (props) => {
     return(
+        <Link
+        to={props.link}
+        >
         <div 
-        onClick = {() => props.clickedItem(props.children)}
         className={classes.SidebarItem}>
             {props.children}
         </div>
+        </Link>
     )
 }
 

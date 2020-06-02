@@ -14,6 +14,7 @@ const productCatalog = (props) => {
             name = {product.name}
             price = {product.price}
             desc = {product.desc}
+            image = {product.image}
             />
         })
     }

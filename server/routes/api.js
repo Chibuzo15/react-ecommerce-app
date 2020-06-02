@@ -88,25 +88,25 @@ router.get('/products/:id', (req, res, next) => {
 router.post('/products', (req, res, next) => {
   if (req.body) {
 
-    const image = new Image({
-      _id: new mongoose.Types.ObjectId(),
-      url: 'http://testurl.com',
-    });
+    // const image = new Image({
+    //   _id: req.body.image_id, //get from req
+    //   url: 'http://testurl.com',
+    // });
     const product = new Product({
       AvailableSizes: [],
       name: req.body.name,
       price: req.body.price,
       description: req.body.description,
-      image: image._id //Get the id from the image
+      image: req.body.image_id //Get the id from the image
     });
 
     product.save()
       .then(data => {
         res.json(data)
-        image.save()
-          .then((data) => {
-            res.json(data)
-          })
+        // image.save()
+        //   .then((data) => {
+        //     res.json(data)
+        //   })
       })
       .catch(next)
 
@@ -386,12 +386,13 @@ router.get('/clear-cart', (req, res) => {
 UPLOAD
 */
 
-router.post('/upload-image', upload.single('avatar'), function (req, res, next) {
+router.post('/upload-image', upload.single('product_image'), function (req, res, next) {
   var files;
   var file = req.file.filename;
   var matches = file.match(/^(.+?)_.+?\.(.+)$/i);
 
   if (req.file) {
+    console.log(matches[1] + '--.' + matches[2])
     if (matches) {
       files = _.map(['lg', 'md', 'sm'], function (size) {
         return matches[1] + '_' + size + '.' + matches[2];
@@ -407,11 +408,25 @@ router.post('/upload-image', upload.single('avatar'), function (req, res, next) 
 
       return (req.file.storage == 'local' ? base : '') + '/' + url;
     });
+    
+    let modBaseUrl = req.file.baseUrl.replace('uploads', '')
 
-
-    res.json({
-      images: files
+    const image = new Image({
+      _id: new mongoose.Types.ObjectId(), //get from req
+      url: path.join(modBaseUrl, matches[1] + '--.' + matches[2])
     });
+
+    image.save()
+      .then(() => {
+        res.json({
+          image_id: image._id,
+          url: path.join(modBaseUrl, matches[1] + '--.' + matches[2])
+        });
+      }) 
+      .catch((error) => {
+        res.status(400).send(error)
+      })
+    
   }
   else {
     res.status(400).send()

@@ -1,8 +1,11 @@
 import React from 'react';
+import AdminSideWrapper from '../AdminSideWrapper/AdminSideWrapper';
 
 const AdminUsers = () => {
     return (
-        <div>Admin Users</div>
+        <AdminSideWrapper>
+            <div>Admin Users</div>
+        </AdminSideWrapper>
     )
 }
 

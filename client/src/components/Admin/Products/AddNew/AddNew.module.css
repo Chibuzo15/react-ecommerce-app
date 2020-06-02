@@ -12,3 +12,10 @@
 
 .View button{
 }
+
+.Select_Image{
+    padding: 10px;
+    border: 2px solid grey;
+    font-size: 20px;
+    border-radius: 3px;
+}

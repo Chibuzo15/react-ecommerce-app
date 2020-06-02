@@ -1,0 +1,12 @@
+.Wrapper{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.SideBar{
+    width: 20%;
+}
+
+.Content{
+    width: 80%;
+}
