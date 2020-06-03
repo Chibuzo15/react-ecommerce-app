@@ -58,6 +58,18 @@ class AddNew extends Component {
         file: null
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.image_id !== this.props.image_id) {
+          if(this.props.image_id){
+            this.setState((prevState) => ({
+                formisvalid: true
+            }), 
+            console.log('||||hook|||| Form is valid :', this.state.formisvalid)
+            )
+        }
+        }
+      }
+
     orderHandler = (event) => {
         event.preventDefault();
         const formData = {}
@@ -87,11 +99,6 @@ class AddNew extends Component {
         if (rules.maxLength) {
             isValid = value.length <= rules.minLength && isValid
         }
-        if (this.props.image_id) {
-            isValid = true
-        }else{
-            isValid = false
-        }
         return isValid;
     }
 
@@ -118,6 +125,10 @@ class AddNew extends Component {
         let formisValid = true;
         for (let inputIdentifier in updatedProductForm) {
             formisValid = updatedProductForm[inputIdentifier].valid && formisValid;
+        }
+        //If image is not uploaded yet
+        if(!this.props.image_id){
+            formisValid = false
         }
 
         this.setState({ productForm: updatedProductForm, formisvalid: formisValid })
@@ -177,6 +188,8 @@ class AddNew extends Component {
         if(this.props.image_url){
             image_url = baseUrl + 'images' + this.props.image_url.replace('--', '_sm')
         }
+
+        console.log('Form is valid :', this.state.formisvalid)
         
         return (
             <AdminSideWrapper>
@@ -191,8 +204,7 @@ class AddNew extends Component {
                 <div className={classes.Select_Image}
                 onClick = {()=>{this.fileUploader.click()}}
                 >
-                    Select an Image
-                    
+                    Upload an Image
                 </div>
                 <div>
                     {this.state.file ? this.state.file.name : null }
@@ -203,12 +215,16 @@ class AddNew extends Component {
                      : null}
                 </div>
                 {form}
+                {this.props.added_product ? 
+                <div className={classes.AddProductSuccessfull}> Product added successfully </div>: null    
+                }
                 <div className={classes.View}>
                     <Button
-                        handleClick={() => this.props.history.push('/site-admin/products')}
+                        handleClick={() => this.props.history.push('/site-admin/products/all')}
                     >
                         VIEW ALL PRODUCTS
                     </Button>
+                    
                 </div>
 
             </div>
@@ -220,7 +236,8 @@ class AddNew extends Component {
 const mapStateToProps = state => {
     return {
         image_url : state.products.uploaded_image_url,
-        image_id : state.products.uploaded_image_id
+        image_id : state.products.uploaded_image_id,
+        added_product: state.products.added_product
     }
 }
 

@@ -4,7 +4,8 @@ const initialState = {
     products: null,
     products_error : false,
     uploaded_image_url: null,
-    uploaded_image_id: null
+    uploaded_image_id: null,
+    added_product: null
 }
 
 const productReducer = (state = initialState, action) => {
@@ -22,12 +23,13 @@ const productReducer = (state = initialState, action) => {
         case actionTypes.ADD_PRODUCT_SUCCESS:
             return {
                 ...state,
-                products: state.products.concat(action.product)
+                added_product: action.product
             }
         case actionTypes.ADD_PRODUCT_FAILED:
             return {
                 ...state,
                 products_error: true,
+                added_product: null
             }
         case actionTypes.DELETE_PRODUCT_SUCCESS:
             return {

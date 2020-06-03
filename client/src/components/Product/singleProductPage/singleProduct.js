@@ -1,12 +1,26 @@
 import React from 'react';
 import classes from './singleProduct.module.css';
 import Button from '../../UI/Button/button';
-import product3 from '../../../assets/images/Products/suit-3.jpg';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import {addToCart, removeFromCart} from '../../../store/actions/index';
 
 const singleProduct = (props) => {
+
+    //formatting base url for node server , which is used to serve product images
+    const public_url = window.location.origin.toString();
+
+    let baseUrl = "https://protected-springs-06155.herokuapp.com/";
+    if (public_url.includes("localhost")){
+        baseUrl = "http://localhost:5000/";
+    }
+
+    let image_url = null
+    if(props.location.state.image){
+        image_url = baseUrl + 'images' + props.location.state.image.replace('--', '_lg')
+    }
+    console.log('Image :', image_url)
+
     return(
         <div className={classes.Wrapper}>
             <div className={classes.ProductDetails}>
@@ -29,7 +43,7 @@ const singleProduct = (props) => {
             
             <img 
             className={classes.image}
-            src={product3} 
+            src={image_url} 
             alt='single product image' />
             
         </div>

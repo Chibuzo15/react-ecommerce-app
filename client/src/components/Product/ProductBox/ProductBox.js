@@ -29,7 +29,7 @@ const ProductBox = (props) => {
         <div 
         onClick={() => history.push({
             pathname: `${props.match.path}/productsingle`,
-            state: { id : props.id, name : props.name, price: props.price, desc: props.desc }
+            state: { id : props.id, name : props.name, price: props.price, desc: props.desc, image: props.image }
         })}
         className={classes.ProductBox}>
             <img 

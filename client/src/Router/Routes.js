@@ -37,9 +37,9 @@ const Routes = (props) => {
 
 
             <Route path='/site-admin' exact component={Admin} />
-            {/* <Route path="/site-admin">
+            <Route path="/site-admin">
                     {props.adminLoggedIn ? null : <Redirect to="/site-admin/login" />}
-            </Route> */} 
+            </Route>
             <Switch>
                 <Route path='/site-admin/products' exact component={AdminProducts}/>
                 <Route path='/site-admin/products/all' exact component={ProductList}/>
