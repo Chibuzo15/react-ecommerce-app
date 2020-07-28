@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import PaystackButton from 'react-paystack';
+import {PaystackButton} from 'react-paystack';
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -11,7 +11,7 @@ class PaystackForm extends Component {
     state = {
         key: "pk_test_8dcba9bc99e7c09c86f03363e0f34a0b8cb88496", //PAYSTACK PUBLIC KEY
         email: this.props.email,  // customer email
-        amount: this.props.amount 
+        amount: this.props.amount
     }
 
     callback = (response) => {

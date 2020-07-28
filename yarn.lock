@@ -410,6 +410,11 @@ assert-plus@1.0.0, assert-plus@^1.0.0:
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
   integrity sha1-8S4PPF13sLHN2RRpQuTpbB5N1SU=
 
+async@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
+  integrity sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -1649,6 +1654,11 @@ mongodb@3.5.7:
     safe-buffer "^5.1.2"
   optionalDependencies:
     saslprep "^1.0.0"
+
+mongoose-deep-populate@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/mongoose-deep-populate/-/mongoose-deep-populate-3.2.0.tgz#3abbdf42f63460f7c4a830da5ed31e1e4fd07abd"
+  integrity sha512-MD77o0Wo1e+s8sipP9xRytDdEBX5mfJGRfGGLA1D378+o9mXgCES3+SZxKyhPe+xyLc30abxAX5CK36l9TdpJg==
 
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"

@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+
 // const session = require('express-session')
 const router = express.Router();
-const paystack = require('paystack')('sk_test_e3920dc537d3187f8696a77641f39fa873fb3da4');
+// const paystack = require('paystack')('sk_test_e3920dc537d3187f8696a77641f39fa873fb3da4');
 
 const _ = require('lodash')
 
@@ -320,14 +321,24 @@ router.get('/orders', authenticate, (req, res, next) => {
 })
 
 router.get('/customer/orders', customerAuth, (req, res, next) => {
-  Order.find({
+  const order = Order.find({
     customer_id: req.customer._id
-  }).populate('orderdetails')
+  })
+  order.
+    populate({
+      path: 'orderdetails',
+      populate: {
+        path: 'product_details.id'
+      }
+    })
+    // .deepPopulate('orderdetails.order_id')
     .then((result) => {
-        res.json(result)
+      res.send(result)
     }).catch((err) => {
+      console.log(err)
       res.send(err)
     })
+
 })
 
 /*
