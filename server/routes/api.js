@@ -58,8 +58,8 @@ var upload = multer({
 
 
 /**
- * ROUTES BEGIN 
- * 
+ * ROUTES BEGIN
+ *
  */
 
 /*
@@ -322,12 +322,11 @@ router.get('/orders', authenticate, (req, res, next) => {
 router.get('/customer/orders', customerAuth, (req, res, next) => {
   Order.find({
     customer_id: req.customer._id
-  })
-    .then((data) => {
-      res.json(data)
-    })
-    .catch((error) => {
-      res.json(error)
+  }).populate('orderdetails')
+    .then((result) => {
+        res.json(result)
+    }).catch((err) => {
+      res.send(err)
     })
 })
 
@@ -408,7 +407,7 @@ router.post('/upload-image', upload.single('product_image'), function (req, res,
 
       return (req.file.storage == 'local' ? base : '') + '/' + url;
     });
-    
+
     let modBaseUrl = req.file.baseUrl.replace('uploads', '')
 
     const image = new Image({
@@ -422,11 +421,11 @@ router.post('/upload-image', upload.single('product_image'), function (req, res,
           image_id: image._id,
           url: path.join(modBaseUrl, matches[1] + '--.' + matches[2])
         });
-      }) 
+      })
       .catch((error) => {
         res.status(400).send(error)
       })
-    
+
   }
   else {
     res.status(400).send()

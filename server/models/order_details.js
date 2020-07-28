@@ -9,8 +9,9 @@ const OrderDetails_Schema = new Schema({
     ref: 'Order'
   },
   total_price: Number
-  
-})
+
+}, { toJSON: { virtuals: true } })
+
 
 //create model for todo
 const OrderDetails = mongoose.model('OrderDetails', OrderDetails_Schema);

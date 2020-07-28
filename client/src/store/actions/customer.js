@@ -5,6 +5,7 @@ export const login = (userObj) => {
     return dispatch => {
         axios.post('/api/customers/login', userObj)
             .then(res => {
+                console.log('login successful')
                 const expirationDate = new Date(new Date().getTime() + 3600000)
 
                 localStorage.setItem('customer_token', res.data.token);
@@ -55,7 +56,7 @@ export const logoutSuccess = () => {
     localStorage.removeItem('customer_token');
     localStorage.removeItem('customer_expirationDate');
     localStorage.removeItem('customer_userId');
-    return { 
+    return {
         type: actionTypes.LOGOUT_SUCCESS
     }
 }

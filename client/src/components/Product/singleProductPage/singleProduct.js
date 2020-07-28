@@ -24,7 +24,7 @@ const singleProduct = (props) => {
     return(
         <div className={classes.Wrapper}>
             <div className={classes.ProductDetails}>
-                <span className={classes.ProductTitle}> 
+                <span className={classes.ProductTitle}>
                     {props.location.state.name}
                 </span>
                 <span className={classes.productExcerpts}>
@@ -40,12 +40,12 @@ const singleProduct = (props) => {
                     BUY NOW
                 </Button>
             </div>
-            
-            <img 
+
+            <img
             className={classes.image}
-            src={image_url} 
+            src={image_url}
             alt='single product image' />
-            
+
         </div>
     )
 }
