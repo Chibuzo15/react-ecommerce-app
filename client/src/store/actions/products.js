@@ -96,7 +96,7 @@ export const addProduct = (product) => {
 export const uploadProductImage = (image) => {
     return dispatch => {
         const formData = new FormData();
-        formData.append('product_image', image); 
+        formData.append('product_image', image);
         const header = {
             headers: {
                 'Content-Type': 'multipart/form-data'
