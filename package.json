@@ -33,7 +33,7 @@
     "paystack": "^2.0.1",
     "react-paystack": "^2.0.2",
     "streamifier": "^0.1.1",
-    "validator": "^13.0.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
